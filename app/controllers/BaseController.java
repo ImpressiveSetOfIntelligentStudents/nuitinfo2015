@@ -1,5 +1,6 @@
 package controllers;
 
+import models.User;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -13,5 +14,17 @@ public class BaseController extends Controller {
     public static void setInfosFromConf() {
         renderArgs.put("title", Play.configuration.getProperty("application.title"));
         renderArgs.put("applicationName", Play.configuration.getProperty("application.nameOnApp"));
+        renderArgs.put("userConnected", getConnectedUser());
+    }
+
+    public static User getConnectedUser() {
+        Long idUser;
+        try {
+            idUser = Long.parseLong(session.get("idUser"));
+        } catch(Exception e) {
+            return null;
+        }
+
+        return User.findById(idUser);
     }
 }

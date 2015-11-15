@@ -42,10 +42,15 @@
                 <li><a href="#">Item 2</a></li>
                 <li><a href="#">Item 3</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Espace membre <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">#{if userConnected}${userConnected.prenom} ${userConnected.nom}#{/if}#{else}Espace membre#{/else} <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="@{Application.connect()}">Connexion</a></li>
-                        <li><a href="@{Application.register()}">Inscription</a></li>
+                        #{if userConnected}
+                            <li><a href="@{Users.disconnect()}">Se déconnecter</a></li>
+                        #{/if}
+                        #{else}
+                            <li><a href="@{Application.connect()}">Connexion</a></li>
+                            <li><a href="@{Application.register()}">Inscription</a></li>
+                        #{/else}
                     </ul>
                 </li>
             </ul>
@@ -54,6 +59,58 @@
     </div>
     <!-- /.container -->
 </nav>
+
+#{if isAccueil}
+<!-- Header Carousel -->
+<header id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image:url('http://placehold.it/1920x400');"></div>
+            <div class="carousel-caption">
+                <h2>${applicationName}</h2>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image:url('http://placehold.it/1920x400');"></div>
+            <div class="carousel-caption">
+                <h2>${applicationName}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</header>
+#{/if}
+
+<div class="container">
+    #{if flash.success}
+        <div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 20px;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            ${flash.success}
+        </div>
+    #{/if}
+
+    #{if flash.error}
+        <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 20px;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        ${flash.error}
+        </div>
+    #{/if}
+</div>
 
 #{doLayout /}
 

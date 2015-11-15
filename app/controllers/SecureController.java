@@ -23,9 +23,4 @@ public class SecureController extends BaseController{
             }
         }
     }
-
-    public User getConnectedUser() {
-        Long idUser = Long.getLong(session.get("idUser"));
-        return User.findById(idUser);
-    }
 }

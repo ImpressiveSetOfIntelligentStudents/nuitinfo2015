@@ -13,12 +13,16 @@ import javax.persistence.Table;
 @Table(name = "user")
 public class User extends Model {
 
+    // Minimum pour que ça fonctionne
     @Column
     public String email;
     @Column
     public String hashedPassword;
-    @Column
-    public String salt;
 
     // Ajouter ce dont on aura besoin
+    @Column
+    public String nom;
+
+    @Column
+    public String prenom;
 }
