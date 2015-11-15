@@ -1,4 +1,66 @@
 #{extends 'main.html' /}
-#{set title:'Home' /}
+#{set title:'Accueil' /}
 
-#{welcome /}
+<!-- Header Carousel -->
+<header id="myCarousel" class="carousel slide">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="fill" style="background-image:url('http://placehold.it/1920x400');"></div>
+            <div class="carousel-caption">
+                <h2>${applicationName}</h2>
+            </div>
+        </div>
+        <div class="item">
+            <div class="fill" style="background-image:url('http://placehold.it/1920x400');"></div>
+            <div class="carousel-caption">
+                <h2>${applicationName}</h2>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+        <span class="icon-prev"></span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+        <span class="icon-next"></span>
+    </a>
+</header>
+
+
+
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Marketing Icons Section -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Bienvenue sur ${applicationName}
+            </h1>
+            <p>${applicationName} est lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia quam vitae tempor porta. Etiam purus nunc, varius vel est nec, efficitur luctus nunc. Vivamus risus augue, fermentum et lorem nec, imperdiet imperdiet ligula. Cras at facilisis elit, non rhoncus lectus. Curabitur nec purus non erat vulputate cursus. Donec in neque enim. Integer nulla ante, semper vitae felis at, hendrerit dignissim nulla. Pellentesque rhoncus in libero quis eleifend. Suspendisse quis porttitor felis. Mauris lacinia enim eu consectetur sollicitudin. Etiam consequat fringilla leo. Fusce id condimentum ex. </p>
+            <center>
+
+                <a href="#" class="btn btn-success">Commencer maintenant</a></center>
+
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+
+#{set 'scriptsJS'}
+<script>
+
+</script>
+#{/set}
