@@ -1,11 +1,6 @@
 package controllers;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import play.*;
-import play.data.validation.Validation;
-import play.mvc.*;
-
-import java.util.*;
 
 import models.*;
 
@@ -21,7 +16,7 @@ public class Application extends BaseController {
     }
 
     public static void connectPost(String email, String motDePasse) {
-        User user = User.find("email = ?", email).first();
+        Utilisateur user = Utilisateur.find("email = ?", email).first();
         if(user == null) {
             flash.error("Les identifiants sont incorrects 1");
             index();
@@ -43,12 +38,12 @@ public class Application extends BaseController {
     }
 
     public static void registerPost(String nom, String prenom, String motDePasse, String motDePasseConfirmation, String email) {
-        User user = new User();
+        Utilisateur user = new Utilisateur();
         user.email = email;
         user.nom = nom;
         user.prenom = prenom;
 
-        if(User.count("email = ?", email) > 0) {
+        if(Utilisateur.count("email = ?", email) > 0) {
             flash.error("Cette adresse email est déjà associée à un utilisateur.");
             register();
         }

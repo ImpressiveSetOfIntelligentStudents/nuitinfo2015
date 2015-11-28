@@ -1,8 +1,7 @@
 package controllers;
 
-import models.User;
+import models.Utilisateur;
 import play.mvc.Before;
-import play.mvc.Controller;
 
 /**
  * Created by julien on 15/11/15.
@@ -15,7 +14,7 @@ public class SecureController extends BaseController{
         if(idUser == null) {
             forbidden();
         } else {
-            User user = User.findById(idUser);
+            Utilisateur user = Utilisateur.findById(idUser);
             if(user == null) {
                 forbidden();
             } else {

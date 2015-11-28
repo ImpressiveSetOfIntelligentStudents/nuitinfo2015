@@ -10,8 +10,8 @@ import javax.persistence.Table;
  * Created by julien on 15/11/15.
  */
 @Entity
-@Table(name = "user")
-public class User extends Model {
+@Table(name = "utilisateur")
+public class Utilisateur extends Model {
 
     // Minimum pour que ça fonctionne
     @Column

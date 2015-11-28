@@ -1,6 +1,6 @@
 package controllers;
 
-import models.User;
+import models.Utilisateur;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -17,7 +17,7 @@ public class BaseController extends Controller {
         renderArgs.put("userConnected", getConnectedUser());
     }
 
-    public static User getConnectedUser() {
+    public static Utilisateur getConnectedUser() {
         Long idUser;
         try {
             idUser = Long.parseLong(session.get("idUser"));
@@ -25,6 +25,6 @@ public class BaseController extends Controller {
             return null;
         }
 
-        return User.findById(idUser);
+        return Utilisateur.findById(idUser);
     }
 }
