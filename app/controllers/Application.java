@@ -18,7 +18,7 @@ public class Application extends BaseController {
     public static void connectPost(String email, String motDePasse) {
         Utilisateur user = Utilisateur.find("email = ?", email).first();
         if(user == null) {
-            flash.error("Les identifiants sont incorrects 1");
+            flash.error("Les identifiants sont incorrects.");
             index();
         }
 
@@ -27,7 +27,7 @@ public class Application extends BaseController {
             flash.success("Vous êtes bien connecté.");
             index();
         } else {
-            flash.error("Les identifiants sont incorrects 2");
+            flash.error("Les identifiants sont incorrects.");
             connect();
         }
 
@@ -45,6 +45,7 @@ public class Application extends BaseController {
 
         if(Utilisateur.count("email = ?", email) > 0) {
             flash.error("Cette adresse email est déjà associée à un utilisateur.");
+            params.flash();
             register();
         }
 
@@ -55,6 +56,7 @@ public class Application extends BaseController {
             index();
         } else {
             flash.error("Les deux mot de passe doivent être équivalent.");
+            params.flash();
             register();
         }
     }
