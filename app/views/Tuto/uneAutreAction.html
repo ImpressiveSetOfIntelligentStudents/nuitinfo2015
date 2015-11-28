@@ -30,7 +30,7 @@
             },
             success : function(data){
                 $('.well').html(data.nombre);
-                console.log(data.message);
+                ajouterNotification("success", data.message);
             },
             error : function(data){
                 alert("ERROR");
