@@ -1,0 +1,41 @@
+#{extends 'main.html' /}
+#{set title:'Se connecter' /}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-header">Exemple AJAX</h2>
+
+
+            <div class="well">
+                1
+            </div>
+            <a href="#" id="btn" class="btn btn-primary btn-success btn-lg">Multiplier par 3</a>
+        </div>
+    </div>
+</div>
+
+
+
+#{set 'scriptsJS'}
+<script>
+    $('#btn').click(function(event) {
+        event.preventDefault();
+
+        $.ajax({
+            url : 'exempleAJAX',
+            type : 'POST',
+            data: {
+                unNombre: eval($('.well').html())
+            },
+            success : function(data){
+                $('.well').html(data.nombre);
+                console.log(data.message);
+            },
+            error : function(data){
+                alert("ERROR");
+            }
+        });
+    })
+</script>
+#{/set}

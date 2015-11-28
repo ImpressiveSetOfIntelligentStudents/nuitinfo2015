@@ -1,0 +1,52 @@
+#{extends 'main.html' /}
+#{set title:'Se connecter' /}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="page-header">Tuto</h2>
+
+            <!-- Afficher une variable -->
+            ${maVar}
+            Une date : ${maDate?.format("dd/MM/yyyy")}
+            <!-- C'est du groovy, donc on a accès a tout ce qui est disponible en groovy-->
+
+            <!-- Un bloc de code Groovy -->
+            %{
+                def uneVar
+                def list = [1, "deux", 3.0, 4L]
+                print list
+            }%
+
+            <!-- Les conditions -->
+            #{if maVar}
+                <p>VRAI</p>
+            #{/if}
+            #{else}
+                <p>FAUX</p>
+            #{/else}
+
+
+            <!-- Boucles -->
+            #{list items:maListe, var:'item'}
+                ${item}
+                #{if  item.isAdministrateur()}
+                    <p>Tu es admin</p>
+                #{/if}
+                #{elseif item.isModerateur}
+                    <p>Tu es moderateur</p>
+                #{/elseif}
+                #{else}
+                    <p>Tu es un membre</p>
+                #{/else}
+            #{/list}
+
+            <!-- On peut linker les appels sans problemes -->
+            ${utilisateit.role.id}
+            #{list items:utilisateur?.vehicules, item:'vehicule'}
+
+            #{/list}
+        </div>
+    </div>
+
+</div>
