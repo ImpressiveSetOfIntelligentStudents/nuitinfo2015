@@ -9,7 +9,11 @@
   - Télécharger la lib en bas de la page  : [Framework Play 1.3.1](https://www.playframework.com/download)
   - La désarchiver quelque part
 
+A partir de là, il faut appliquer une des deux méthodes. C'est au choix.
+Si soucis avec la première, contacter Léo.
+Avec la deuxième, Julien.
 
+## Méthode sans ajouter la lib play au PATH
 
 -   Configurer l'IDE
   - Ouvrir les préférences du logiciel et rechercher "playframework" dans le moteur de recherche. In the Working directory field, specify the Play framework working directory. This is the directory from which the commands of the play command-line utility are run. ![img1](/tuto/img1.png)
@@ -34,3 +38,10 @@
 
 
 Voila, j'espère que votre IDE va faire le reste. Normalement vous devriez pouvoir lancer les tests JUnit et lancer le serveur sur le port 9000 avec la configuration suivante : ![img4](/tuto/img4.png)
+
+## Méthode en ajoutant la lib play au path
+
+- Ajouter la lib play a votre path (export PATH=$PATH:/CHEMIN/VERS/PLAY/play-1.3.1)
+- Ouvrir votre projet
+- Afficher la console (Alt + F12)
+- "play run" lance l'application. Elle est disponible sur http://localhost:9000/
