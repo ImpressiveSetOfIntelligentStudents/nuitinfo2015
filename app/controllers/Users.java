@@ -18,6 +18,6 @@ public class Users extends Controller {
     public static void disconnect() {
         session.clear();
         flash.success("Vous êtes bien déconnecté.");
-        Application.index();
+        Accueil.index();
     }
 }

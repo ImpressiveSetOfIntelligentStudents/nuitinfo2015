@@ -6,9 +6,9 @@
         <div class="col-md-4 col-md-offset-4">
             <h2 class="page-header">Connexion</h2>
             <p>Pour acceder à certaines fonctionnalités, vous devez être connecté.<br>
-                Si vous n'avez pas de compte sur ${applicationName}, vous pouvez en créer un en cliquant <a href="@{Application.register()}">ici</a>.<br></p>
+                Si vous n'avez pas de compte sur ${applicationName}, vous pouvez en créer un en cliquant <a href="@{Accueil.register()}">ici</a>.<br></p>
 
-            <form action="@{Application.connectPost()}" method="post" class="form-signin" >
+            <form action="@{Accueil.connectPost()}" method="post" class="form-signin" >
                 <input name="email" type="text" class="form-control" value="" placeholder="E-mail" value="${flash?.email}" required autofocus>
                 <br>
                 <input name="motDePasse" type="password" class="form-control" value="" placeholder="Mot de Passe" required>

@@ -4,7 +4,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 
 import models.*;
 
-public class Application extends BaseController {
+public class Accueil extends BaseController {
 
     public static void index() {
         boolean isAccueil = true;

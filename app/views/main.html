@@ -37,7 +37,7 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="@{Application.index()}">Accueil</a></li>
+                <li><a href="@{Accueil.index()}">Accueil</a></li>
                 <li><a href="#">Item 1</a></li>
                 <li><a href="#">Item 2</a></li>
                 <li><a href="#">Item 3</a></li>
@@ -48,8 +48,8 @@
                             <li><a href="@{Users.disconnect()}">Se déconnecter</a></li>
                         #{/if}
                         #{else}
-                            <li><a href="@{Application.connect()}">Connexion</a></li>
-                            <li><a href="@{Application.register()}">Inscription</a></li>
+                            <li><a href="@{Accueil.connect()}">Connexion</a></li>
+                            <li><a href="@{Accueil.register()}">Inscription</a></li>
                         #{/else}
                     </ul>
                 </li>
@@ -120,7 +120,7 @@
     <footer>
         <div class="row">
             <div class="col-lg-12">
-                Application réalisée dans le cadre de la nuit de l'informatique 2015 par l'équipe Impressive Set Of Intelligent Students.
+                Accueil réalisée dans le cadre de la nuit de l'informatique 2015 par l'équipe Impressive Set Of Intelligent Students.
             </div>
         </div>
     </footer>
