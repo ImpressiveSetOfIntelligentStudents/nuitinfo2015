@@ -10,8 +10,8 @@
             <h1>Hello, world!</h1>
             <form method="post" action="@{Civil.ajouterPostDanger()}">
                 <input type="submit" class="btn btn-danger" value="Je suis en danger">
-                <input type="hidden" name="lat">
-                <input type="hidden" name="lng">
+                <input type="hidden" id="lat" name="lat">
+                <input type="hidden" id="lng" name="lng">
             </form>
             <p class="textalign-center"><a href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info">Continuer vers ${applicationName}</a>
             <p class="textalign-center"><a href="@{Autorite.index()}" class="btn btn-info">Je suis une autorité</a>
@@ -22,7 +22,42 @@
 <!-- /.container -->
 
 #{set 'scriptsJS'}
-<script>
+<script type="text/javascript">
+    var map;
+
+    var lat = 0;
+    var lng = 0;
+
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            alert("Activez la géolocalisation pour une meilleure expérience.");
+        }
+    }
+
+    function showPosition(position) {
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        document.getElementById("lat").setAttribute("value", lat);
+        document.getElementById("lng").setAttribute("value", lng);
+
+        console.log(lat);
+        console.log(lng);
+
+        var latLng = new google.maps.LatLng(lat, lng);
+        map.setCenter(latLng);
+        map.setZoom(7);
+    }
+
+    function initMap() {
+        getLocation();
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 0, lng: 0},
+            zoom: 1
+        });
+    }
 
 </script>
 #{/set}
