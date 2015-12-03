@@ -31,4 +31,39 @@ public class Post extends Model {
     @Column
     public TypePost typePost;
 
+
+    public enum TypePost {
+        DANGER ("Danger"),
+        OK ("Ok");
+
+        private String name = "";
+
+        TypePost(String name){
+            this.name = name;
+        }
+
+        public String toString(){
+            return name;
+        }
+    }
+
+    public enum TypeCatastrophe {
+        SEISME("Séisme"),
+        TSUNAMI ("Tsunami"),
+        INONDATION("Inondation"),
+        OURAGAN("Ouragan/Cyclone/Typhon"),
+        ATTENTAT("Attentat terroriste"),
+        BANDITISME("Banditisme");
+
+        private String name = "";
+
+        TypeCatastrophe(String name){
+            this.name = name;
+        }
+
+        public String toString(){
+            return name;
+        }
+    }
+
 }

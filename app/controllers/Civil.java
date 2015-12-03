@@ -1,9 +1,5 @@
 package controllers;
-
-import javafx.geometry.Pos;
-import models.Location;
 import models.Post;
-import models.TypePost;
 
 import java.util.List;
 
@@ -26,15 +22,15 @@ public class Civil extends BaseController {
         p.text = post;
         p.lat = lat;
         p.lng = lng;
-        p.typePost = TypePost.OK;
+        p.typePost = Post.TypePost.OK;
         p.save();
         flash.success("Votre post a été pris en compte");
         dashboard();
     }
 
 
-    public static ajouterPostDanger() {
-
+    public static void ajouterPostDanger() {
+        dashboard();
     }
 
 }
