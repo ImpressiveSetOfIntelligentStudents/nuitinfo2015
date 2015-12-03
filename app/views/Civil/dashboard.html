@@ -26,19 +26,25 @@
             <hr/>
 
             #{list items:lesPosts, as:'post'}
-            <div class="panel panel-default">
-                <div class="panel-heading">Jean Pierre le 05/23/14</div>
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong>Anonyme</strong></div>
                 <div class="panel-body">
-                    <p>${post.text} TAG = ${post.tag}</p>
+                    <p>${post.text}</p>
+                    #{if post.media}
+                        <div>${post.media}</div>
+                    #{/if}
                 </div>
             </div>
             #{/list}
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-                    <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
+
+            #{if nbPosts > 5}
+            <ul class="pagination">
+                #{list items:0..(nbPosts/5), as:'i'}
+                    <li><a href="@{Civil.dashboard(false, 5, i)}">${i + 1}</a></li>
+                #{/list}
+            </ul>
+            #{/if}
+
 
             <h2>Carte des évènements</h2>
             <hr/>
