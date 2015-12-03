@@ -17,9 +17,9 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" name="lon" value=""/>
-                <input type="hidden" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" values="Valider"/>
+                <input type="hidden" id="lon" name="lon" value=""/>
+                <input type="hidden" id="lat" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" value="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
@@ -102,6 +102,8 @@
         function showPosition(position) {
             lat = position.coords.latitude;
             lon = position.coords.longitude;
+            document.getElementById("lat").setAttribute("value", lat);
+            document.getElementById("lon").setAttribute("value", lon);
 
             var latLng = new google.maps.LatLng(lat, lon);
             map.setCenter(latLng);
