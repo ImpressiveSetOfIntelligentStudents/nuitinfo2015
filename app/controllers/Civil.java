@@ -1,6 +1,7 @@
 package controllers;
 import models.Post;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,9 +13,9 @@ public class Civil extends BaseController {
         render();
     }
 
-    public static void dashboard() {
+    public static void dashboard(Boolean demandeSecours) {
         List<Post> lesPosts = Post.all().fetch();
-        render(lesPosts);
+        render(lesPosts, demandeSecours);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -23,14 +24,24 @@ public class Civil extends BaseController {
         p.lat = lat;
         p.lng = lng;
         p.typePost = Post.TypePost.OK;
+        p.dateCreation = new Date();
         p.save();
         flash.success("Votre post a été pris en compte");
-        dashboard();
+        dashboard(false);
     }
 
 
-    public static void ajouterPostDanger() {
-        dashboard();
+    public static void ajouterPostDanger(Double lat, Double lng) {
+        Post p = new Post();
+        p.dateCreation = new Date();
+        p.lng = lng;
+        p.lat = lat;
+        p.typePost = Post.TypePost.DANGER;
+        p.save();
+
+        flash.success("Votre demande de secours a bien été prise en compte");
+        boolean demandeSecours = true;
+        dashboard(demandeSecours);
     }
 
 }

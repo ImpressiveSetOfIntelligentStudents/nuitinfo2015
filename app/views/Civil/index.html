@@ -8,8 +8,12 @@
     <div class="row">
         <div class="jumbotron">
             <h1>Hello, world!</h1>
-            <p class="textalign-center"><button type="button" class="btn btn-danger">Je suis en danger</button></p>
-            <p class="textalign-center"><a href="@{Civil.dashboard()}" class="btn btn-info">Continuer vers ${applicationName}</a></p>
+            <form method="post" action="@{Civil.ajouterPostDanger()}">
+                <input type="submit" class="btn btn-danger" value="Je suis en danger">
+                <input type="hidden" name="lat">
+                <input type="hidden" name="lng">
+            </form>
+            <p class="textalign-center"><a href="@{Civil.dashboard(false)}" class="btn btn-info">Continuer vers ${applicationName}</a></p>
         </div>
     </div>
     <!-- /.row -->
