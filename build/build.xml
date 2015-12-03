@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ISOIS-NuitDeLinfo2015" default="war" basedir="..">
+
+    <property name="project-name" value="${ant.project.name}" />
+    <property name="builder" value="ISOIS-NuitDeLinfo2015" />
+
+    <tstamp prefix="build-info">
+        <format property="date-formatted-for-war-file-name" pattern="yyyy-MM-dd_hh-mm-ss" locale="en" />
+    </tstamp>
+    <property name="war-file-name" value="${project-name}-${build-info.date-formatted-for-war-file-name}.war" />
+
+    <property name="build-directory" value="build/dist" />
+
+    <target name="war">
+        <mkdir dir="${build-directory}" />
+        <exec command="play war --exclude ${build-directory} -o ${build-directory}/${war-file-name}"></exec>
+    </target>
+
+</project>
