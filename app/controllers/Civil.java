@@ -18,7 +18,7 @@ public class Civil extends BaseController {
     public static void dashboard(Boolean demandeSecours, int size, int page) {
         int start = size * page;
 
-        List<Post> lesPosts = Post.all().from(start).fetch(size);
+        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
         render(lesPosts, demandeSecours, lesGroupes, nbPosts);
@@ -34,6 +34,8 @@ public class Civil extends BaseController {
                 break;
             }
         }
+
+        System.out.println(tag);
 
         Post p = new Post();
         p.text = post;
