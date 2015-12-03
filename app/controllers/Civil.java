@@ -75,7 +75,7 @@ public class Civil extends BaseController {
         u.sexe = sexe;
         u.telephone = tel;
         u.dateNaissance = dateNaissance;
-
+        u.ip = request.remoteAddress;
         u.save();
     }
 
