@@ -18,7 +18,7 @@ public class Civil extends BaseController {
     public static void dashboard(Boolean demandeSecours, int size, int page) {
         int start = size * page;
 
-        List<Post> lesPosts = Post.all().from(start).fetch(size);
+        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
         render(lesPosts, demandeSecours, lesGroupes, nbPosts);
@@ -34,6 +34,8 @@ public class Civil extends BaseController {
                 break;
             }
         }
+
+        System.out.println(tag);
 
         Post p = new Post();
         p.text = post;
@@ -63,7 +65,8 @@ public class Civil extends BaseController {
         dashboard(demandeSecours, 5, 0);
     }
 
-    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, Utilisateur.GroupeSanguin groupesanguin, String sexe) {
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email,
+                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, Date dateNaissance) {
         Utilisateur u = new Utilisateur();
         u.nom = nom;
         u.prenom = prenom;
@@ -71,8 +74,8 @@ public class Civil extends BaseController {
         u.groupeSanguin = groupesanguin;
         u.sexe = sexe;
         u.telephone = tel;
-        //u.dateNaissance = dateNaissance;
-
+        u.dateNaissance = dateNaissance;
+        u.ip = request.remoteAddress;
         u.save();
     }
 
