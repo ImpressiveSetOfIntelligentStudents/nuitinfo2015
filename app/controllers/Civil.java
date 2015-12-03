@@ -1,6 +1,7 @@
 package controllers;
 import models.Post;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,10 +20,21 @@ public class Civil extends BaseController {
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
+
+        String tag = null;
+        List<String> splitStr = Arrays.asList(post.split("\\s+"));
+        for (String s : splitStr) {
+            if(s.contains("#")) {
+                tag = s;
+                break;
+            }
+        }
+
         Post p = new Post();
         p.text = post;
         p.lat = lat;
         p.lng = lng;
+        p.tag = tag;
         p.typePost = Post.TypePost.OK;
         p.dateCreation = new Date();
         p.save();
