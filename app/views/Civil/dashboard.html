@@ -17,9 +17,9 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" name="lon" value=""/>
-                <input type="hidden" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" values="Valider"/>
+                <input type="hidden" id="lng" name="lng" value=""/>
+                <input type="hidden" id="lat" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" value="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
@@ -31,6 +31,7 @@
                 <div class="panel-body">
                     <p>${post.text}</p>
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
+                    ${post.lat} - ${post.lat}
                     #{if post.media}
                         <div>${post.media}</div>
                     #{/if}
@@ -150,7 +151,7 @@
         var map;
 
         var lat = 0;
-        var lon = 0;
+        var lng = 0;
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -162,9 +163,11 @@
 
         function showPosition(position) {
             lat = position.coords.latitude;
-            lon = position.coords.longitude;
+            lng = position.coords.longitude;
+            document.getElementById("lat").setAttribute("value", lat);
+            document.getElementById("lng").setAttribute("value", lng);
 
-            var latLng = new google.maps.LatLng(lat, lon);
+            var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
             map.setZoom(7);
         }
