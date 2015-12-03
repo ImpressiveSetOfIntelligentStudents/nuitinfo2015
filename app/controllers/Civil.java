@@ -39,14 +39,17 @@ public class Civil extends BaseController {
                 break;
             }
         }
-        FileUploader uploader = new FileUploader();
-        String url = uploader.uploadMediaFile(media);
         Post p = new Post();
+        if(media!=null) {
+
+            FileUploader uploader = new FileUploader();
+            String url = uploader.uploadMediaFile(media);
+            p.url = url;
+        }
         p.text = post;
         p.lat = lat;
         p.lng = lng;
         p.tag = tag;
-        p.url = url;
         p.typePost = Post.TypePost.OK;
         p.dateCreation = new Date();
         p.ip = request.remoteAddress;
@@ -64,7 +67,6 @@ public class Civil extends BaseController {
         p.typePost = Post.TypePost.DANGER;
         p.ip = request.remoteAddress;
         p.save();
-
         flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
         dashboard(demandeSecours, 5, 0);
