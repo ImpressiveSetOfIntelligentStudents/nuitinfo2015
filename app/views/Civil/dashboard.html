@@ -17,7 +17,7 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" id="lon" name="lon" value=""/>
+                <input type="hidden" id="lng" name="lng" value=""/>
                 <input type="hidden" id="lat" name="lat" value=""/>
                 <input type="submit" class="btn btn-success" value="Valider"/>
             </form>
@@ -29,7 +29,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Jean Pierre le 05/23/14</div>
                 <div class="panel-body">
-                    <p>${post.text} TAG = ${post.tag}</p>
+                    <p>${post.text} TAG = ${post.tag} (${post.lng}, ${post.lat})</p>
                 </div>
             </div>
             #{/list}
@@ -89,7 +89,7 @@
         var map;
 
         var lat = 0;
-        var lon = 0;
+        var lng = 0;
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -101,11 +101,11 @@
 
         function showPosition(position) {
             lat = position.coords.latitude;
-            lon = position.coords.longitude;
+            lng = position.coords.longitude;
             document.getElementById("lat").setAttribute("value", lat);
-            document.getElementById("lon").setAttribute("value", lon);
+            document.getElementById("lng").setAttribute("value", lng);
 
-            var latLng = new google.maps.LatLng(lat, lon);
+            var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
             map.setZoom(7);
         }
