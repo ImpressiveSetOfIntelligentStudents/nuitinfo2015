@@ -63,7 +63,8 @@ public class Civil extends BaseController {
         dashboard(demandeSecours, 5, 0);
     }
 
-    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, Utilisateur.GroupeSanguin groupesanguin, String sexe) {
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email,
+                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, Date dateNaissance) {
         Utilisateur u = new Utilisateur();
         u.nom = nom;
         u.prenom = prenom;
@@ -71,7 +72,7 @@ public class Civil extends BaseController {
         u.groupeSanguin = groupesanguin;
         u.sexe = sexe;
         u.telephone = tel;
-        //u.dateNaissance = dateNaissance;
+        u.dateNaissance = dateNaissance;
 
         u.save();
     }
