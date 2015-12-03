@@ -2,9 +2,8 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by julien on 15/11/15.
@@ -30,4 +29,32 @@ public class Utilisateur extends Model {
 
     @Column
     public String sexe;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateNaissance;
+
+    @Column
+    public String telephone;
+
+    public enum GroupeSanguin {
+        ONEG("O-"),
+        OPOS("O+"),
+        ANEG("A-"),
+        APOS("A+"),
+        BNEG("B-"),
+        BPOS("B+"),
+        ABNEG("AB-"),
+        ABPOS("AB+");
+
+        private String name = "";
+
+        GroupeSanguin(String name){
+            this.name = name;
+        }
+
+        public String toString(){
+            return name;
+        }
+    }
 }
