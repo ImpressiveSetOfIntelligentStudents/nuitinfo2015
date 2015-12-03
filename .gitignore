@@ -6,6 +6,8 @@
 /public/javascripts/press
 /public/stylesheets/press
 /lib
+/build/dist
+/precompiled
 
 /db/h2/*
 
