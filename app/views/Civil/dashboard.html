@@ -17,9 +17,9 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" name="lon" value=""/>
-                <input type="hidden" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" values="Valider"/>
+                <input type="hidden" id="lng" name="lng" value=""/>
+                <input type="hidden" id="lat" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" value="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
@@ -27,9 +27,11 @@
 
             #{list items:lesPosts, as:'post'}
             <div class="panel panel-info">
-                <div class="panel-heading"><strong>Anonyme</strong></div>
+                <div class="panel-heading"><strong>Anonyme (${post.ip})</strong></div>
                 <div class="panel-body">
                     <p>${post.text}</p>
+                    #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
+                    ${post.lat} - ${post.lat}
                     #{if post.media}
                         <div>${post.media}</div>
                     #{/if}
@@ -79,21 +81,21 @@
                         <p>Aucune de ces informations n'est obligatoire.</p>
                     </div>
 
-                    <div class="form-group">
+                    <div class="row form-group">
                         <label class="col-sm-2 control-label" for="nom">Nom</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="row form-group">
                         <label class="col-sm-2 control-label" for="prenom">Prénom</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="row form-group">
                         <label class="col-sm-2 control-label" for="email">Email</label>
                         <div class="col-sm-4">
                             <input type="email" class="form-control" id="email" name="email" placeholder="Adresse email">
@@ -104,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="row form-group">
                         <label class="col-sm-2 control-label">Sexe</label>
                         <label class="radio-inline">
                             <input type="radio" name="sexe" id="masculin" value="Homme" checked>
@@ -115,8 +117,7 @@
                             Femme
                         </label>
                     </div>
-
-                    <div class="form-group">
+                    <div class="row form-group">
                         <label class="col-sm-4 control-label">Groupe Sanguin</label>
                         <div class="col-sm-3">
                             <select name="groupesanguin" class="form-control">
@@ -125,24 +126,13 @@
                                 #{/list}
                             </select>
                         </div>
-                        <div class="col-sm-7"></div>
+                        <div class="col-sm-5"></div>
                     </div>
-                    <div class="row">
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepicker1'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
-                            </div>
+                    <div class="row form-group">
+                        <label class="col-sm-3 control-label">Date de naissance</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dateNaissance" placeholder="JJ/MM/YYYY" />
                         </div>
-                        <script type="text/javascript">
-                            $(function () {
-                                $('#datetimepicker1').datetimepicker();
-                            });
-                        </script>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -161,7 +151,7 @@
         var map;
 
         var lat = 0;
-        var lon = 0;
+        var lng = 0;
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -173,9 +163,11 @@
 
         function showPosition(position) {
             lat = position.coords.latitude;
-            lon = position.coords.longitude;
+            lng = position.coords.longitude;
+            document.getElementById("lat").setAttribute("value", lat);
+            document.getElementById("lng").setAttribute("value", lng);
 
-            var latLng = new google.maps.LatLng(lat, lon);
+            var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
             map.setZoom(7);
         }
@@ -192,6 +184,15 @@
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+
+    <script>
+        #{list items:lesEvenements, as:'event'}
+            var marker = new google.maps.Marker({
+                position: {lat: 0.0+${event.lat}, lng: 0.0+${event.lon}},
+                map: map
+            });
+        #{/list}
+    </script>
 
     <script>
         #{if demandeSecours}

@@ -1,7 +1,9 @@
 package controllers;
+import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -18,10 +20,12 @@ public class Civil extends BaseController {
     public static void dashboard(Boolean demandeSecours, int size, int page) {
         int start = size * page;
 
-        List<Post> lesPosts = Post.all().from(start).fetch(size);
+        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
-        render(lesPosts, demandeSecours, lesGroupes, nbPosts);
+        List<Evenement> lesEvenements = Evenement.all().fetch();
+
+        render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -34,6 +38,8 @@ public class Civil extends BaseController {
                 break;
             }
         }
+
+        System.out.println(tag);
 
         Post p = new Post();
         p.text = post;
@@ -63,7 +69,8 @@ public class Civil extends BaseController {
         dashboard(demandeSecours, 5, 0);
     }
 
-    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, Utilisateur.GroupeSanguin groupesanguin, String sexe) {
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email,
+                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, Date dateNaissance) {
         Utilisateur u = new Utilisateur();
         u.nom = nom;
         u.prenom = prenom;
@@ -71,8 +78,8 @@ public class Civil extends BaseController {
         u.groupeSanguin = groupesanguin;
         u.sexe = sexe;
         u.telephone = tel;
-        //u.dateNaissance = dateNaissance;
-
+        u.dateNaissance = dateNaissance;
+        u.ip = request.remoteAddress;
         u.save();
     }
 
