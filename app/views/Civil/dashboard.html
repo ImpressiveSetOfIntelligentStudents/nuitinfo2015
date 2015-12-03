@@ -1,0 +1,38 @@
+#{extends 'main.html' /}
+#{set title:'Accueil' /}
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Marketing Icons Section -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1>Bienvenue</h1>
+            <p>Tralalalalalalalalalala </p>
+        </div>
+        <div class="col-lg-9">
+            <h2>Communiquer</h2>
+
+            <form method="POST" action="@{Civil.ajouterPost()}">
+                <textarea name="post"></textarea>
+                <input type="submit" class="btn btn-success">Valider<input/>
+            </form>
+
+            <h2>Carte des évènements</h2>
+        </div>
+
+        <div class="col-lg-3">
+            <h2 class="page-header">
+                Module de chat
+            </h2>
+        </div>
+    </div>
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+
+#{set 'scriptsJS'}
+<script>
+
+</script>
+#{/set}
