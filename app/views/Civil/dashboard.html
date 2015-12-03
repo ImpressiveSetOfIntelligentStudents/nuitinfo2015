@@ -18,6 +18,11 @@
                 <input type="submit" class="btn btn-success">Valider<input/>
             </form>
 
+            <h2>Les posts</h2>
+            #{list items:lesPosts, as:'post'}
+                <p>${post.text}</p>
+            #{/list}
+
             <h2>Carte des évènements</h2>
         </div>
 
