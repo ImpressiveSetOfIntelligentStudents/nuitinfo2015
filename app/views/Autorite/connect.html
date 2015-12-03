@@ -1,0 +1,50 @@
+#{extends 'Autorite/main.html' /}
+#{set title:'Accueil' /}
+
+
+<head>
+
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="@{'/public/javascripts/Chart.js-master/Chart.js'}"></script>
+
+    <style>
+        #map {
+            width: 650px;
+            height: 400px;
+        }
+    </style>
+
+
+</head>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Marketing Icons Section -->
+    <div class="row">
+        <h1 class="page-header">
+            Connexion
+        </h1>
+        <div class="col-lg-6">
+            <form action="connectPost">
+            Identifiant
+            <input type="text" class="form-control" name="email">
+            <br>
+            Mot de passe
+            <input type="password" class="form-control" name="motDePasse">
+
+            <br>
+             <button type="submit" class="btn btn-default" >Connexion</button>
+            <a href="register">Créer un compte administrateur</a>
+            </form>
+        </div>
+
+    <!-- /.row -->
+</div>
+<!-- /.container -->
+
+
+
+#{set 'scriptsJS'}
+
+#{/set}
