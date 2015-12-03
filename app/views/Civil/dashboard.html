@@ -27,9 +27,10 @@
 
             #{list items:lesPosts, as:'post'}
             <div class="panel panel-info">
-                <div class="panel-heading"><strong>Anonyme</strong></div>
+                <div class="panel-heading"><strong>Anonyme (${post.ip})</strong></div>
                 <div class="panel-body">
                     <p>${post.text}</p>
+                    #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
                     #{if post.media}
                         <div>${post.media}</div>
                     #{/if}
