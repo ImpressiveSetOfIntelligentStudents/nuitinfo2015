@@ -1,8 +1,8 @@
 package controllers;
-
 import org.apache.commons.codec.digest.DigestUtils;
-
+import java.io.File;
 import models.*;
+import services.*;
 
 public class Accueil extends BaseController {
 
@@ -59,5 +59,13 @@ public class Accueil extends BaseController {
             params.flash();
             register();
         }
+    }
+
+    public static void upload(File media){
+        System.out.println(media.getName());
+        FileUploader uploader = new FileUploader();
+        String url = uploader.uploadMediaFile(media);
+        flash.success(url);
+        index();
     }
 }
