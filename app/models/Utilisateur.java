@@ -12,6 +12,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur extends Model {
+    @Column
+    public String ip;
 
     // Minimum pour que ça fonctionne
     @Column
@@ -25,4 +27,7 @@ public class Utilisateur extends Model {
 
     @Column
     public String prenom;
+
+    @Column
+    public String sexe;
 }
