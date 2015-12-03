@@ -31,10 +31,10 @@
                 <div class="panel-body">
                     <p>${post.text}</p>
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
-                    ${post.lat} - ${post.lat}
                     #{if post.media}
                         <div>${post.media}</div>
                     #{/if}
+                    ${post.lat} - ${post.lng}
                 </div>
             </div>
             #{/list}
@@ -166,6 +166,9 @@
             lng = position.coords.longitude;
             document.getElementById("lat").setAttribute("value", lat);
             document.getElementById("lng").setAttribute("value", lng);
+
+            console.log(lat);
+            console.log(lng);
 
             var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
