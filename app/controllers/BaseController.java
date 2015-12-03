@@ -1,6 +1,7 @@
 package controllers;
 
 import models.Utilisateur;
+import models.UtilisateurAutorite;
 import play.Play;
 import play.mvc.Before;
 import play.mvc.Controller;
@@ -14,10 +15,14 @@ public class BaseController extends Controller {
     public static void setInfosFromConf() {
         renderArgs.put("title", Play.configuration.getProperty("application.title"));
         renderArgs.put("applicationName", Play.configuration.getProperty("application.nameOnApp"));
-        renderArgs.put("userConnected", getConnectedUser());
+
+        UtilisateurAutorite userConnected = getConnectedUser();
+
+        renderArgs.put("userConnected", userConnected);
+
     }
 
-    public static Utilisateur getConnectedUser() {
+    public static UtilisateurAutorite getConnectedUser() {
         Long idUser;
         try {
             idUser = Long.parseLong(session.get("idUser"));
@@ -25,6 +30,6 @@ public class BaseController extends Controller {
             return null;
         }
 
-        return Utilisateur.findById(idUser);
+        return UtilisateurAutorite.findById(idUser);
     }
 }
