@@ -1,6 +1,8 @@
 package controllers;
+import models.Evenement;
 import models.Post;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -16,7 +18,17 @@ public class Civil extends BaseController {
 
     public static void dashboard(Boolean demandeSecours) {
         List<Post> lesPosts = Post.all().fetch();
-        render(lesPosts, demandeSecours);
+
+        /*Evenement e1 = new Evenement(Post.TypeCatastrophe.ATTENTAT, 0.0, 0.0, new ArrayList<Post>());
+        e1.save();
+        Evenement e2 = new Evenement(Post.TypeCatastrophe.INONDATION, 40.0, 12.0, new ArrayList<Post>());
+        e2.save();*/
+
+        List<Evenement> lesEvenements = Evenement.all().fetch();
+
+        System.out.print(lesEvenements.get(1).toString());
+
+        render(lesPosts, lesEvenements, demandeSecours);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
