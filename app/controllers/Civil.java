@@ -15,10 +15,13 @@ public class Civil extends BaseController {
         render();
     }
 
-    public static void dashboard(Boolean demandeSecours) {
-        List<Post> lesPosts = Post.all().fetch();
+    public static void dashboard(Boolean demandeSecours, int size, int page) {
+        int start = size * page;
+
+        List<Post> lesPosts = Post.all().from(start).fetch(size);
+        int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
-        render(lesPosts, demandeSecours, lesGroupes);
+        render(lesPosts, demandeSecours, lesGroupes, nbPosts);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -42,7 +45,7 @@ public class Civil extends BaseController {
         p.ip = request.remoteAddress;
         p.save();
         flash.success("Votre post a été pris en compte");
-        dashboard(false);
+        dashboard(false, 5, 0);
     }
 
 
@@ -57,7 +60,7 @@ public class Civil extends BaseController {
 
         flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
-        dashboard(demandeSecours);
+        dashboard(demandeSecours, 5, 0);
     }
 
     public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, Utilisateur.GroupeSanguin groupesanguin, String sexe) {
