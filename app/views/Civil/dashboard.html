@@ -33,6 +33,14 @@
             </div>
             #{/list}
 
+            <ul class="pagination">
+                ${nbPosts}
+                #{list items:0..(nbPosts/5), as:'i'}
+                    <li><a href="@{Civil.dashboard(5, i)}">${i + 1}</a></li>
+                #{/list}
+            </ul>
+
+
             <h2>Carte des évènements</h2>
             <div onload="initialiser()">
                 <div id="carte" style="width:100%; height:100%"></div>

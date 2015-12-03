@@ -12,9 +12,13 @@ public class Civil extends BaseController {
         render();
     }
 
-    public static void dashboard() {
-        List<Post> lesPosts = Post.all().fetch();
-        render(lesPosts);
+    public static void dashboard(int size, int page) {
+
+        int start = size * page;
+
+        List<Post> lesPosts = Post.all().from(start).fetch(size);
+        int nbPosts = Post.findAll().size();
+        render(lesPosts, nbPosts);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -25,12 +29,12 @@ public class Civil extends BaseController {
         p.typePost = Post.TypePost.OK;
         p.save();
         flash.success("Votre post a été pris en compte");
-        dashboard();
+        dashboard(5, 0);
     }
 
 
     public static void ajouterPostDanger() {
-        dashboard();
+        dashboard(5, 0);
     }
 
 }
