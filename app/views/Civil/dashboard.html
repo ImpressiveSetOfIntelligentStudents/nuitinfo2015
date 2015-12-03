@@ -22,7 +22,15 @@
 
             <h2>Les posts</h2>
             #{list items:lesPosts, as:'post'}
-                <p>${post.text}</p>
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong>Anonyme</strong></div>
+                <div class="panel-body">
+                    <p>${post.text}</p>
+                    #{if post.media}
+                        <div>${post.media}</div>
+                    #{/if}
+                </div>
+            </div>
             #{/list}
 
             <h2>Carte des évènements</h2>
