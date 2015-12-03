@@ -2,10 +2,9 @@ package models;
 
 import play.db.jpa.Model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.File;
+import java.util.Date;
 
 /**
  * Created by cedricrohaut on 12/3/15.
@@ -30,6 +29,10 @@ public class Post extends Model {
 
     @Column
     public TypePost typePost;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateCreation;
 
 
     public enum TypePost {
