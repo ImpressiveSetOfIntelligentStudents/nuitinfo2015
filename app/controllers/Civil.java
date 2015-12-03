@@ -1,7 +1,9 @@
 package controllers;
+import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,9 @@ public class Civil extends BaseController {
         List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
-        render(lesPosts, demandeSecours, lesGroupes, nbPosts);
+        List<Evenement> lesEvenements = Evenement.all().fetch();
+
+        render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {

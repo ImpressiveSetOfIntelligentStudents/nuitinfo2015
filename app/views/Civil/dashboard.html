@@ -189,6 +189,15 @@
     <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
 
     <script>
+        #{list items:lesEvenements, as:'event'}
+            var marker = new google.maps.Marker({
+                position: {lat: 0.0+${event.lat}, lng: 0.0+${event.lon}},
+                map: map
+            });
+        #{/list}
+    </script>
+
+    <script>
         #{if demandeSecours}
             $('#modalSecours').modal('toggle');
         #{/if}
