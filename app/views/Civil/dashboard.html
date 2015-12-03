@@ -196,9 +196,24 @@
 
     <script>
         #{list items:lesEvenements, as:'event'}
-            var marker = new google.maps.Marker({
+
+            var infoWindowContent${event.id} = '<div class="info_content">' +
+                                    '<h3>${event.type}</h3>' +
+                                    '<p><a href="@{Evenements.index(event.id)}">Afficher les détails.</a></p>' +
+                                    '</div>';
+
+            // Initialise the inforWindow
+            var infoWindow${event.id} = new google.maps.InfoWindow({
+                content: infoWindowContent${event.id}
+            });
+
+            var marker${event.id} = new google.maps.Marker({
                 position: {lat: 0.0+${event.lat}, lng: 0.0+${event.lon}},
                 map: map
+            });
+
+            google.maps.event.addListener(marker${event.id}, 'click', function() {
+                infoWindow${event.id}.open(map, marker${event.id});
             });
         #{/list}
     </script>
