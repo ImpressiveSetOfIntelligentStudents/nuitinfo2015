@@ -1,6 +1,8 @@
 package controllers;
 import models.Post;
+import models.Utilisateur;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class Civil extends BaseController {
 
     public static void dashboard(Boolean demandeSecours) {
         List<Post> lesPosts = Post.all().fetch();
-        render(lesPosts, demandeSecours);
+        List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
+        render(lesPosts, demandeSecours, lesGroupes);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -42,6 +45,9 @@ public class Civil extends BaseController {
         flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
         dashboard(demandeSecours);
+    }
+
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, String groupesanguin, String sexe) {
     }
 
 }
