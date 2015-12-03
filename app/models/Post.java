@@ -25,6 +25,9 @@ public class Post extends Model {
     public String tag;
 
     @Column
+    public String url;
+
+    @Column
     public Double lat;
 
     @Column

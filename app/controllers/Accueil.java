@@ -61,11 +61,4 @@ public class Accueil extends BaseController {
         }
     }
 
-    public static void upload(File media){
-        System.out.println(media.getName());
-        FileUploader uploader = new FileUploader();
-        String url = uploader.uploadMediaFile(media);
-        flash.success(url);
-        index();
-    }
 }

@@ -2,11 +2,12 @@ package controllers;
 import models.Evenement;
 import models.Post;
 import models.Utilisateur;
-
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import services.FileUploader;
 
 /**
  * Created by Elliot on 03/12/2015.
@@ -28,7 +29,7 @@ public class Civil extends BaseController {
         render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
-    public static void ajouterPost(String post, Double lat, Double lng, String youtubeURL) {
+    public static void ajouterPost(String post, Double lat, Double lng, String youtubeURL, File media) {
 
         String tag = null;
         List<String> splitStr = Arrays.asList(post.split("\\s+"));
@@ -38,15 +39,15 @@ public class Civil extends BaseController {
                 break;
             }
         }
-
-        System.out.println(tag);
-
+        FileUploader uploader = new FileUploader();
+        String url = uploader.uploadMediaFile(media);
         Post p = new Post();
         p.text = post;
         p.youtubeURL = youtubeURL;
         p.lat = lat;
         p.lng = lng;
         p.tag = tag;
+        p.url = url;
         p.typePost = Post.TypePost.OK;
         p.dateCreation = new Date();
         p.ip = request.remoteAddress;
