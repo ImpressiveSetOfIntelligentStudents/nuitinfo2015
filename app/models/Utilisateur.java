@@ -14,13 +14,12 @@ public class Utilisateur extends Model {
     @Column
     public String ip;
 
-    // Minimum pour que ça fonctionne
     @Column
     public String email;
+
     @Column
     public String hashedPassword;
 
-    // Ajouter ce dont on aura besoin
     @Column
     public String nom;
 
@@ -36,6 +35,9 @@ public class Utilisateur extends Model {
 
     @Column
     public String telephone;
+
+    @Column
+    public GroupeSanguin groupeSanguin;
 
     public enum GroupeSanguin {
         ONEG("O-"),
