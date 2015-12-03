@@ -28,7 +28,7 @@ public class Civil extends BaseController {
         render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
-    public static void ajouterPost(String post, Double lat, Double lng) {
+    public static void ajouterPost(String post, Double lat, Double lng, String youtubeURL) {
 
         String tag = null;
         List<String> splitStr = Arrays.asList(post.split("\\s+"));
@@ -43,6 +43,7 @@ public class Civil extends BaseController {
 
         Post p = new Post();
         p.text = post;
+        p.youtubeURL = youtubeURL;
         p.lat = lat;
         p.lng = lng;
         p.tag = tag;

@@ -17,9 +17,11 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" id="lng" name="lng" value=""/>
-                <input type="hidden" id="lat" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" value="Valider"/>
+                <label>URL Youtube</label>
+                <input class="form-control" name="youtubeURL" value=""/>
+                <input type="hidden" name="lng" value=""/>
+                <input type="hidden" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" values="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
@@ -34,6 +36,9 @@
                     ${post.lat} - ${post.lat}
                     #{if post.media}
                         <div>${post.media}</div>
+                    #{/if}
+                    #{if post.youtubeURL}
+                        <iframe width="500" height="300" src="${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
                     #{/if}
                 </div>
             </div>
