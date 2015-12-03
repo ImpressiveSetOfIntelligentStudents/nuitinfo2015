@@ -17,10 +17,12 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="file" name="media"
-                <input type="hidden" id="lng" name="lng" value=""/>
-                <input type="hidden" id="lat" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" value="Valider"/>
+                <input type="file" name="media">
+                <label>URL Youtube</label>
+                <input class="form-control" name="youtubeURL" value=""/>
+                <input type="hidden" name="lng" value=""/>
+                <input type="hidden" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" values="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
@@ -34,6 +36,9 @@
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
                     #{if post.media}
                         <div>${post.media}</div>
+                    #{/if}
+                    #{if post.youtubeURL}
+                        <iframe width="500" height="300" src="${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
                     #{/if}
                     ${post.lat} - ${post.lng}
                 </div>
@@ -191,9 +196,24 @@
 
     <script>
         #{list items:lesEvenements, as:'event'}
-            var marker = new google.maps.Marker({
+
+            var infoWindowContent${event.id} = '<div class="info_content">' +
+                                    '<h3>${event.type}</h3>' +
+                                    '<p><a href="@{Evenements.index(event.id)}">Afficher les détails.</a></p>' +
+                                    '</div>';
+
+            // Initialise the inforWindow
+            var infoWindow${event.id} = new google.maps.InfoWindow({
+                content: infoWindowContent${event.id}
+            });
+
+            var marker${event.id} = new google.maps.Marker({
                 position: {lat: 0.0+${event.lat}, lng: 0.0+${event.lon}},
                 map: map
+            });
+
+            google.maps.event.addListener(marker${event.id}, 'click', function() {
+                infoWindow${event.id}.open(map, marker${event.id});
             });
         #{/list}
     </script>

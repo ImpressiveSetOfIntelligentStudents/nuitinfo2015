@@ -24,12 +24,16 @@ public class Civil extends BaseController {
         List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
+
+        new Evenement(Post.TypeCatastrophe.ATTENTAT, 40.0, 40.0, new ArrayList<Post>()).save();
+        new Evenement(Post.TypeCatastrophe.OURAGAN, 60.0, 60.0, new ArrayList<Post>()).save();
+
         List<Evenement> lesEvenements = Evenement.all().fetch();
 
         render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
-    public static void ajouterPost(String post, Double lat, Double lng, File media) {
+    public static void ajouterPost(String post, Double lat, Double lng, String youtubeURL, File media) {
 
         String tag = null;
         List<String> splitStr = Arrays.asList(post.split("\\s+"));
@@ -47,6 +51,7 @@ public class Civil extends BaseController {
             p.url = url;
         }
         p.text = post;
+        p.youtubeURL = youtubeURL;
         p.lat = lat;
         p.lng = lng;
         p.tag = tag;

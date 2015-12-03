@@ -19,6 +19,9 @@ public class Post extends Model {
     public File media;
 
     @Column
+    public String youtubeURL;
+
+    @Column
     public String tag;
 
     @Column

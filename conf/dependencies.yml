@@ -3,3 +3,4 @@
 require:
     - play
     - commons-codec -> commons-codec 1.2
+    - com.amazonaws -> aws-java-sdk 1.10.38
