@@ -13,4 +13,8 @@ public class Autorite extends BaseController {
     public static void details() {
         render();
     }
+
+    public static void connect() {
+        render();
+    }
 }
