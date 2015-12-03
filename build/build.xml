@@ -13,7 +13,13 @@
 
     <target name="war">
         <mkdir dir="${build-directory}" />
-        <exec command="play war --exclude ${build-directory} -o ${build-directory}/${war-file-name}"></exec>
+        <exec executable="play">
+            <arg value="war"/>
+            <arg value="--exclude"/>
+            <arg value="${build-directory}"/>
+            <arg value="-o"/>
+            <arg value="${build-directory}/${war-file-name}"/>
+        </exec>
     </target>
 
 </project>
