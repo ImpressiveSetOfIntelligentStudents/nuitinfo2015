@@ -58,7 +58,17 @@ public class Civil extends BaseController {
         dashboard(demandeSecours);
     }
 
-    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, String groupesanguin, String sexe) {
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email, Utilisateur.GroupeSanguin groupesanguin, String sexe) {
+        Utilisateur u = new Utilisateur();
+        u.nom = nom;
+        u.prenom = prenom;
+        u.email = email;
+        u.groupeSanguin = groupesanguin;
+        u.sexe = sexe;
+        u.telephone = tel;
+        //u.dateNaissance = dateNaissance;
+
+        u.save();
     }
 
 }
