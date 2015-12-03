@@ -39,6 +39,7 @@ public class Civil extends BaseController {
         p.tag = tag;
         p.typePost = Post.TypePost.OK;
         p.dateCreation = new Date();
+        p.ip = request.remoteAddress;
         p.save();
         flash.success("Votre post a été pris en compte");
         dashboard(false);
@@ -51,6 +52,7 @@ public class Civil extends BaseController {
         p.lng = lng;
         p.lat = lat;
         p.typePost = Post.TypePost.DANGER;
+        p.ip = request.remoteAddress;
         p.save();
 
         flash.success("Votre demande de secours a bien été prise en compte");
