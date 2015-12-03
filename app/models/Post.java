@@ -23,7 +23,10 @@ public class Post extends Model {
     public String tag;
 
     @Column
-    public Location location;
+    public Double lat;
+
+    @Column
+    public Double lng;
 
     @Column
     public TypePost typePost;
