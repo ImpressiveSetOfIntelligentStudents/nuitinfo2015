@@ -15,8 +15,9 @@
         <div class="col-lg-9">
             <h2>Communiquer</h2>
             <hr/>
-            <form method="POST" action="@{Civil.ajouterPost()}">
+            <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
+                <input type="file" name="media"
                 <input type="hidden" id="lng" name="lng" value=""/>
                 <input type="hidden" id="lat" name="lat" value=""/>
                 <input type="submit" class="btn btn-success" value="Valider"/>
@@ -29,7 +30,7 @@
             <div class="panel panel-info">
                 <div class="panel-heading"><strong>Anonyme (${post.ip})</strong></div>
                 <div class="panel-body">
-                    <p>${post.text}</p>
+                    <p>${post.text}</p><p><a href="${post.url}">${post.url}</a></p>
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
                     ${post.lat} - ${post.lat}
                     #{if post.media}

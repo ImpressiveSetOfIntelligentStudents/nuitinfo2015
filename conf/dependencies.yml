@@ -3,4 +3,3 @@
 require:
     - play
     - commons-codec -> commons-codec 1.2
-
