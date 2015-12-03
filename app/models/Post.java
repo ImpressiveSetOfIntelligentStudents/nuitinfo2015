@@ -34,6 +34,9 @@ public class Post extends Model {
     @Temporal(TemporalType.TIMESTAMP)
     public Date dateCreation;
 
+    @Column
+    public String ip;
+
 
     public enum TypePost {
         DANGER ("Danger"),

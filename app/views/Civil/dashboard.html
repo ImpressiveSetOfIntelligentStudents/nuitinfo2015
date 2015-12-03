@@ -17,28 +17,36 @@
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="hidden" name="lon" value=""/>
-                <input type="hidden" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" values="Valider"/>
+                <input type="hidden" id="lng" name="lng" value=""/>
+                <input type="hidden" id="lat" name="lat" value=""/>
+                <input type="submit" class="btn btn-success" value="Valider"/>
             </form>
 
             <h2>Les derniers posts</h2>
             <hr/>
 
             #{list items:lesPosts, as:'post'}
-            <div class="panel panel-default">
-                <div class="panel-heading">Jean Pierre le 05/23/14</div>
+            <div class="panel panel-info">
+                <div class="panel-heading"><strong>Anonyme (${post.ip})</strong></div>
                 <div class="panel-body">
-                    <p>${post.text} TAG = ${post.tag}</p>
+                    <p>${post.text}</p>
+                    #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
+                    ${post.lat} - ${post.lat}
+                    #{if post.media}
+                        <div>${post.media}</div>
+                    #{/if}
                 </div>
             </div>
             #{/list}
-            <nav>
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Older</a></li>
-                    <li class="next"><a href="#">Newer <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
+
+            #{if nbPosts > 5}
+            <ul class="pagination">
+                #{list items:0..(nbPosts/5), as:'i'}
+                    <li><a href="@{Civil.dashboard(false, 5, i)}">${i + 1}</a></li>
+                #{/list}
+            </ul>
+            #{/if}
+
 
             <h2>Carte des évènements</h2>
             <hr/>
@@ -66,18 +74,72 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Demande de secours prise en compte !</h4>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-info">
-                    <p>Afin d'aider les secours, veuillez indiquer des informations complémentaires</p>
-                    <form>
-                        // TO DO !
-                    </form>
+            <form method="post" action="@{Civil.ajouterInfosDanger}">
+                <div class="modal-body">
+                    <div class="alert alert-info">
+                        <p>Afin d'aider les secours, veuillez indiquer des informations complémentaires.</p>
+                        <p>Aucune de ces informations n'est obligatoire.</p>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-sm-2 control-label" for="nom">Nom</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-sm-2 control-label" for="prenom">Prénom</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-sm-2 control-label" for="email">Email</label>
+                        <div class="col-sm-4">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Adresse email">
+                        </div>
+                        <label class="col-sm-2 control-label" for="tel">Téléphone</label>
+                        <div class="col-sm-4">
+                            <input type="tel" class="form-control" id="tel" name="tel" placeholder="Numéro de téléphone">
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <label class="col-sm-2 control-label">Sexe</label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sexe" id="masculin" value="Homme" checked>
+                            Homme
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="sexe" id="feminin" value="Femme">
+                            Femme
+                        </label>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-4 control-label">Groupe Sanguin</label>
+                        <div class="col-sm-3">
+                            <select name="groupesanguin" class="form-control">
+                                #{list items:lesGroupes, as:'groupe'}
+                                    <option value="${groupe}">${groupe.name}</option>
+                                #{/list}
+                            </select>
+                        </div>
+                        <div class="col-sm-5"></div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-sm-3 control-label">Date de naissance</label>
+                        <div class="col-sm-4">
+                            <input type="text" class="form-control" name="dateNaissance" placeholder="JJ/MM/YYYY" />
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Enregistrer" />
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -89,7 +151,7 @@
         var map;
 
         var lat = 0;
-        var lon = 0;
+        var lng = 0;
 
         function getLocation() {
             if (navigator.geolocation) {
@@ -101,9 +163,11 @@
 
         function showPosition(position) {
             lat = position.coords.latitude;
-            lon = position.coords.longitude;
+            lng = position.coords.longitude;
+            document.getElementById("lat").setAttribute("value", lat);
+            document.getElementById("lng").setAttribute("value", lng);
 
-            var latLng = new google.maps.LatLng(lat, lon);
+            var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
             map.setZoom(7);
         }

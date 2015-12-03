@@ -1,6 +1,7 @@
 package controllers;
 import models.Evenement;
 import models.Post;
+import models.Utilisateur;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,19 +17,15 @@ public class Civil extends BaseController {
         render();
     }
 
-    public static void dashboard(Boolean demandeSecours) {
-        List<Post> lesPosts = Post.all().fetch();
+    public static void dashboard(Boolean demandeSecours, int size, int page) {
+        int start = size * page;
 
-        /*Evenement e1 = new Evenement(Post.TypeCatastrophe.ATTENTAT, 0.0, 0.0, new ArrayList<Post>());
-        e1.save();
-        Evenement e2 = new Evenement(Post.TypeCatastrophe.INONDATION, 40.0, 12.0, new ArrayList<Post>());
-        e2.save();*/
-
+        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
+        int nbPosts = Post.findAll().size();
+        List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
         List<Evenement> lesEvenements = Evenement.all().fetch();
 
-        System.out.print(lesEvenements.get(1).toString());
-
-        render(lesPosts, lesEvenements, demandeSecours);
+        render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
     }
 
     public static void ajouterPost(String post, Double lat, Double lng) {
@@ -42,6 +39,8 @@ public class Civil extends BaseController {
             }
         }
 
+        System.out.println(tag);
+
         Post p = new Post();
         p.text = post;
         p.lat = lat;
@@ -49,9 +48,10 @@ public class Civil extends BaseController {
         p.tag = tag;
         p.typePost = Post.TypePost.OK;
         p.dateCreation = new Date();
+        p.ip = request.remoteAddress;
         p.save();
         flash.success("Votre post a été pris en compte");
-        dashboard(false);
+        dashboard(false, 5, 0);
     }
 
 
@@ -61,11 +61,26 @@ public class Civil extends BaseController {
         p.lng = lng;
         p.lat = lat;
         p.typePost = Post.TypePost.DANGER;
+        p.ip = request.remoteAddress;
         p.save();
 
         flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
-        dashboard(demandeSecours);
+        dashboard(demandeSecours, 5, 0);
+    }
+
+    public static void ajouterInfosDanger(String nom, String prenom, String tel, String email,
+                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, Date dateNaissance) {
+        Utilisateur u = new Utilisateur();
+        u.nom = nom;
+        u.prenom = prenom;
+        u.email = email;
+        u.groupeSanguin = groupesanguin;
+        u.sexe = sexe;
+        u.telephone = tel;
+        u.dateNaissance = dateNaissance;
+        u.ip = request.remoteAddress;
+        u.save();
     }
 
 }
