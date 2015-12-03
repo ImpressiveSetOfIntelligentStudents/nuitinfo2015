@@ -1,8 +1,8 @@
 package controllers;
-
 import org.apache.commons.codec.digest.DigestUtils;
-
+import java.io.File;
 import models.*;
+import services.*;
 
 public class Accueil extends BaseController {
 
@@ -60,4 +60,5 @@ public class Accueil extends BaseController {
             register();
         }
     }
+
 }
