@@ -69,7 +69,18 @@ header.carousel .fill {
 /* Footer Styles */
 
 footer {
-    margin: 50px 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-top: 50px;
+    color: #99979c;
+    text-align: center;
+    background-color: #2a2730;
+    height: 100px;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+
 }
 
 /* Responsive Styles */
@@ -104,4 +115,13 @@ footer {
 #videopj{
     padding: 4px;
     vertical-align: top;
+}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#content {
+    padding-bottom:130px;
 }

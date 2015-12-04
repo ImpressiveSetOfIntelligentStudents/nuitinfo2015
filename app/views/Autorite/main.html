@@ -39,7 +39,7 @@
     <![endif]-->
 </head>
 <body>
-
+<div id="wrapper">
 <!-- Navigation -->
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
@@ -80,7 +80,7 @@
 </nav>
 
 
-
+    <div id ="content">
 <div class="container" id="notifications">
     #{if flash.success}
         <div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 20px;">
@@ -100,11 +100,17 @@
 #{doLayout /}
 
 
-<div class="container">
-    <!-- Footer -->
-    <footer>
-
-    </footer>
+</div>
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                Accueil réalisée dans le cadre de la nuit de l'informatique 2015 par l'équipe Impressive Set Of Intelligent Students.
+            </div>
+        </div>
+    </div>
+</footer>
 </div>
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
