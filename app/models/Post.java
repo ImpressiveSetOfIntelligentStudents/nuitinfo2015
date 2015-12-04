@@ -16,9 +16,6 @@ public class Post extends Model {
     public String text;
 
     @Column
-    public File media;
-
-    @Column
     public String youtubeURL;
 
     @Column
