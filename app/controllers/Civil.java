@@ -68,6 +68,7 @@ public class Civil extends BaseController {
         System.out.println(lng);
         Post p = new Post();
         p.dateCreation = new Date();
+
         p.lng = lng;
         p.lat = lat;
         p.typePost = Post.TypePost.DANGER;
