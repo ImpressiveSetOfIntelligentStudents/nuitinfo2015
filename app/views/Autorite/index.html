@@ -42,12 +42,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                #{list items:events, var:'item'}
-                <tr>
-                    <td><a href="details"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
-                    <td>${item.DateCreation}</td>
-                    <td>${item.lesPosts.get(0)}</td>
-                </tr>
+                #{list items:events, as:'item'}
+                    <tr>
+                        <td><a href="@{Autorite.details(item?.id)}"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
+                        <td>${item?.dateCreation}</td>
+                        <td>#{if item?.lesPosts.size() > 0}${item?.lesPosts?.get(0)}#{/if}</td>
+                    </tr>
                 #{/list}
                 </tbody>
 

@@ -24,8 +24,11 @@ public class Autorite extends BaseController {
             Autorite.connect();
         }
 
-        List<Evenement> events = Evenement.all().fetch();
+        List<Evenement> events = Evenement.findAll();
 
+        for (Evenement event : events) {
+            System.out.println(event.id);
+        }
         render(events);
 
     }
@@ -38,6 +41,7 @@ public class Autorite extends BaseController {
 
 
         Evenement baseEvent = Evenement.findById(idEvent);
+
         Post basePost = baseEvent.lesPosts.get(0);
 
         Boolean finEvent = false;
@@ -135,6 +139,11 @@ public class Autorite extends BaseController {
         Date dans1semaine = cal.getTime();
         eve.dateFin = dans1semaine;
         eve.type = Post.TypeCatastrophe.SEISME;
+        Post newPost = new Post();
+        newPost.tag = "#test";
+        newPost.save();
+        eve.lesPosts = new ArrayList<>();
+        eve.lesPosts.add(newPost);
         eve.save();
         flash.success("Evenement ajouté");
         Autorite.index();
