@@ -8,8 +8,16 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="jumbotron">
+            #{if dashboardApresDanger}
+                <h1>Les authorités vont faire tout leur possible pour vous aider.</h1>
+                <p>
+
+                </p>
+            #{/if}
+            #{else}
                 <h1>Bienvenue</h1>
                 <p>Postez des messages, des photos, des vidéos, et explorez les catastrophes en cours !</p>
+            #{/else}
             </div>
         </div>
         <div class="col-lg-9">
@@ -34,12 +42,14 @@
                 <div class="panel-body">
                     <p>${post.text}</p>
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
+                    <div style="text-align:center;">
                     #{if post.url}
-                        <div><a href="${post.url}"><img width="500" height="300" src="${post.url}"/></a></div>
+                        <div id="piecejointe"><a href="${post.url}"><img id="imgpj" width="300" height="300" src="${post.url}"/></a></div>
                     #{/if}
                     #{if post.youtubeURL}
-                        <iframe width="500" height="300" src="http://www.youtube.com/embed/${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
+                        <iframe id="videopj" width="300" height="300" src="http://www.youtube.com/embed/${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
                     #{/if}
+                    </div>
                     ${post.lat} - ${post.lng}
                 </div>
             </div>
@@ -136,7 +146,12 @@
                     <div class="row form-group">
                         <label class="col-sm-3 control-label">Date de naissance</label>
                         <div class="col-sm-4">
+                            <div class='input-group date' id='datetimepicker'>
                             <input type="text" class="form-control" name="dateNaissance" placeholder="JJ/MM/YYYY" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -221,5 +236,12 @@
         #{if demandeSecours}
             $('#modalSecours').modal('toggle');
         #{/if}
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker();
+            $('#datetimepicker').data("DateTimePicker").format("d/MM/YYYY");
+        });
     </script>
 #{/set}

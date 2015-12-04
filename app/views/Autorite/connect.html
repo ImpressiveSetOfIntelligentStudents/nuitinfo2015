@@ -22,23 +22,22 @@
 
     <!-- Marketing Icons Section -->
     <div class="row">
-        <h1 class="page-header">
+        <div class="col-md-6 col-md-offset-3">
+            <h1 class="page-header">
             Connexion
-        </h1>
-        <div class="col-lg-6">
-            <form action="connectPost">
-            Identifiant
-            <input type="text" class="form-control" name="email">
-            <br>
-            Mot de passe
-            <input type="password" class="form-control" name="motDePasse">
+            </h1>
+            <form action="@{Autorite.connectPost()}">
+                Identifiant
+                <input type="text" class="form-control" name="email">
+                <br>
+                Mot de passe
+                <input type="password" class="form-control" name="motDePasse">
 
-            <br>
-             <button type="submit" class="btn btn-default" >Connexion</button>
-            <a href="register">Créer un compte administrateur</a>
+                <br>
+                 <button type="submit" class="btn btn-default" >Connexion</button>
+                <a href="register">Créer un compte autorité</a>
             </form>
         </div>
-
     <!-- /.row -->
 </div>
 <!-- /.container -->
