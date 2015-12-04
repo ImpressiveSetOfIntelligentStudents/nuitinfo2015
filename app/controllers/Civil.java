@@ -23,7 +23,7 @@ public class Civil extends BaseController {
     public static void dashboard(Boolean demandeSecours, int size, int page) {
         int start = size * page;
 
-        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
+        List<Post> lesPosts = Post.find("typePost!=? order by dateCreation DESC",Post.TypePost.DANGER).from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
 
@@ -64,6 +64,14 @@ public class Civil extends BaseController {
 
 
     public static void ajouterPostDanger(Double lat, Double lng) {
+        Post p = new Post();
+        p.dateCreation = new Date();
+        p.lng = lng;
+        p.lat = lat;
+        p.typePost = Post.TypePost.DANGER;
+        p.ip = request.remoteAddress;
+        p.save();
+        flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
         dashboard(demandeSecours, 5, 0);
     }
