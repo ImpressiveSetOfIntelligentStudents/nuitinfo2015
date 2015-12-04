@@ -44,4 +44,8 @@ public class Evenement extends Model{
 
         dateCreation = new Date();
     }
+
+    public Evenement() {
+
+    }
 }

@@ -131,5 +131,7 @@ public class Autorite extends BaseController {
         eve.dateFin = dans1semaine;
         eve.type = Post.TypeCatastrophe.SEISME;
         eve.save();
+        flash.success("Evenement ajouté");
+        Autorite.index();
     }
 }
