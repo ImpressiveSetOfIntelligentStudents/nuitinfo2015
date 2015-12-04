@@ -132,30 +132,4 @@ public class Autorite extends BaseController {
         flash.success("Vous êtes bien déconnecté.");
         index();
     }
-
-    public static void ajouterEvenementPost() {
-        Evenement eve = new Evenement();
-
-        eve.lon = Math.random() * ( 0D - 50D );
-        eve.lat = Math.random() * ( 0D - 50D );
-        eve.dateCreation = new Date();
-        Calendar cal = new GregorianCalendar();
-        cal.setTime(new Date());
-        cal.add(Calendar.DAY_OF_YEAR, 7);
-        Date dans1semaine = cal.getTime();
-        eve.dateFin = dans1semaine;
-        eve.type = Post.TypeCatastrophe.SEISME;
-        Post newPost = new Post();
-        newPost.tag = "#test";
-        newPost.lng = Math.random() * ( 0D - 50D );
-        newPost.lat = Math.random() * ( 0D - 50D );
-        newPost.typePost = Post.TypePost.DANGER;
-        newPost.url = "http://tpe-seisme-hb.e-monsite.com/medias/images/photo2-article-seisme-2.jpg";
-        newPost.save();
-        eve.lesPosts = new ArrayList<>();
-        eve.lesPosts.add(newPost);
-        eve.save();
-        flash.success("Evenement ajouté");
-        Autorite.index();
-    }
 }
