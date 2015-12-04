@@ -8,6 +8,10 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-12">
+
+                <voice-player id="voix-accueil" accent="fr-FR"></voice-player>
+                <voice-recognition id="commande-vocale"></voice-recognition>
+
                 <form method="post" action="@{Civil.ajouterPostDanger()}">
                     <div class="form-group">
                         <button id="danger" class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
@@ -43,6 +47,26 @@
 <!-- /.container -->
 
 #{set 'scriptsJS'}
+<script type="text/javascript">
+    var voix1 = document.querySelector('#voix-accueil');
+    var ordre = document.querySelector('#commande-vocale');
+
+    voix1.text = "En cas de danger immédiat, appuyez sur la touche Dé ou dites Danger."
+
+    voix1.addEventListener('onend', function() {
+        alert("FIN DISCOURS");
+        //input.textContent = e.detail.result;
+    });
+
+    ordre.addEventListener('result', function(e) {
+        alert(e.detail.result);
+        //reponse.textContent = e.detail.result;
+    });
+
+    voix1.speak();
+    //ordre.start();
+</script>
+
 <script type="text/javascript">
     var map;
 
