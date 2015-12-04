@@ -75,7 +75,7 @@ footer {
     color: #99979c;
     text-align: center;
     background-color: #2a2730;
-    height: 100px;
+    height: 130px;
     width:100%;
     position:absolute;
     bottom:0;
@@ -123,5 +123,32 @@ footer {
 }
 
 #content {
-    padding-bottom:130px;
+    padding-bottom:160px;
+}
+
+footer li {
+    display: inline-block;
+    padding: 0 10px;
+}
+
+footer ul {
+    padding : 0;
+}
+
+footer li a {
+    color: white;
+
+}
+
+footer li a:hover {
+    color: white;
+}
+
+.links {
+    padding-top: 10px;
+}
+
+.alert-css {
+    margin : 15px 30px;
+    padding : 15px;
 }
