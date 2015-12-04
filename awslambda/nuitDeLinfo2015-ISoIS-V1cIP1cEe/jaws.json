@@ -1,0 +1,19 @@
+{
+  "name": "nuitDeLinfo2015-ISoIS-V1cIP1cEe",
+  "version": "0.0.1",
+  "location": "https://github.com/...",
+  "author": "",
+  "description": "",
+  "domain": "com.isois.nuitdelinfo2015",
+  "stages": {
+    "dev": [
+      {
+        "region": "eu-west-1",
+        "iamRoleArnLambda": "arn:aws:iam::366151961359:role/dev-nuitDeLinfo2015-ISoIS-V1cIP1cEe-IamRoleLambda-1BXRJFIGB7FQV",
+        "iamRoleArnApiGateway": "arn:aws:iam::366151961359:role/dev-nuitDeLinfo2015-ISoIS-V1cIP1-IamRoleApiGateway-1NAVPPL4G50KZ",
+        "jawsBucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
+        "restApiId": "zsd68eb360"
+      }
+    ]
+  }
+}
