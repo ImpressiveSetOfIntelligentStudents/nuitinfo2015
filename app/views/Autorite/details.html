@@ -102,24 +102,21 @@
             zoom: 8,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         }
-        var map = new google.maps.Map(mapCanvas, mapOptions)
+        //var map = new google.maps.Map(mapCanvas, mapOptions)
 
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 10,
             center: {lat: ${baseEvent.lat}, lng: ${baseEvent.lon}}
         });
 
+        var markerArry = new Array();
+
         #{list items:baseEvent.lesPosts, as:'item'}
-            var marker = new google.maps.Marker({
-                position: {lat: ${item.lat}, lng: ${item.lng}},
-                map: map,
-                title: 'Hello World!'
-            });
-            var marker2 = new google.maps.Marker({
-                position: {lat: ${item.lat}+0.5, lng: ${item.lng}},
-                map: map,
-                title: 'Hello World!'
-            });
+           markerArry.push(new google.maps.Marker({
+               position: {lat: ${item.lat}, lng: ${item.lng}},
+               map: map,
+               title: 'Hello World!'
+            }));
         #{/list}
 
     }

@@ -141,9 +141,13 @@ public class Autorite extends BaseController {
         eve.type = Post.TypeCatastrophe.SEISME;
         Post newPost = new Post();
         newPost.tag = "#test";
+        newPost.lng = 43.5781881;
+        newPost.lat = - 1.400952;
         newPost.save();
         eve.lesPosts = new ArrayList<Post>();
         eve.lesPosts.add(newPost);
+        eve.lon = 43.5781881;
+        eve.lat = - 1.400952;
         eve.save();
         flash.success("Evenement ajouté");
         Autorite.index();
