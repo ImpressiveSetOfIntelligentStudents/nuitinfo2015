@@ -2,20 +2,21 @@
 #{set title:'Accueil' /}
 
 <!-- Page Content -->
-<div class="container">
+<div class="container"  onkeydown="keyCode(event)">
 
     <!-- Marketing Icons Section -->
     <div class="row">
         <div class="jumbotron">
             <h1>Hello, world!</h1>
             <form method="post" action="@{Civil.ajouterPostDanger()}">
-                <input type="submit" class="btn btn-danger" value="Je suis en danger">
+                <input id="danger" type="submit" class="btn btn-danger" value="Je suis en danger">
                 <input type="hidden" id="lat" name="lat">
                 <input type="hidden" id="lng" name="lng">
             </form>
-            <p class="textalign-center"><a href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info">Continuer vers ${applicationName}</a>
-            <p class="textalign-center"><a href="@{Autorite.index()}" class="btn btn-info">Je suis une autorité</a>
+            <p class="textalign-center"><a id="next" href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info">Continuer vers ${applicationName}</a>
+            <p class="textalign-center"><a id="authority" href="@{Autorite.index()}" class="btn btn-info">Je suis une autorité</a>
         </div>
+        <div class="alert alert-info"><div class="glyphicon glyphicon-alert"></div> Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer</div>
     </div>
     <!-- /.row -->
 </div>
@@ -59,5 +60,19 @@
         });
     }
 
+    $(document).keypress(function(event) {
+                var x = event.which;
+                console.log(event.which);
+                if (x == 100) {
+                    $('#danger').click();
+                } else if (x == 110) {
+                    document.getElementById("next").click();
+                } else if (x == 97) {
+                    document.getElementById("authority").click()
+                }
+            }
+    );
+
 </script>
+
 #{/set}
