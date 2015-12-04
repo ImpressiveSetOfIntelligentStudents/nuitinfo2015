@@ -15,7 +15,9 @@
     </div>
     <div class="row">
         <div class="col-lg-9">
-            <h2>Communiquer</h2>
+
+            <div class="jumbotron">
+                <h2>Communiquer</h2>
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
 
@@ -54,9 +56,11 @@
                     </div>
                 </div>
             </form>
+                </div>
 
+            <div class="jumbotron">
             <h2>Flux d'événements</h2>
-            <hr/>
+            </div>
 
             #{list items:lesPosts, as:'post'}
             <div class="panel panel-info">
