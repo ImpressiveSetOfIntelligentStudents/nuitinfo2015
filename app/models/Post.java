@@ -64,7 +64,7 @@ public class Post extends Model {
         OURAGAN("Ouragan/Cyclone/Typhon"),
         ATTENTAT("Attentat terroriste"),
         BANDITISME("Banditisme"),
-        ADEFINIR("Troplaflemmedespecifier");
+        ADEFINIR("INCONNU");
 
         private String name = "";
 
