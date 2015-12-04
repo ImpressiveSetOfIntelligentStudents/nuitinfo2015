@@ -42,21 +42,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><a href="details"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
-                        <td>16/11/2015</td>
-                        <td>Haaaaaaaaaaaaaa c'est dégeulasse</td>
-                    </tr>
-                    <tr>
-                        <td><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></td>
-                        <td>16/11/2015</td>
-                        <td>A laidaiefhusdhfidshf</td>
-                    </tr>
-                    <tr>
-                        <td><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></td>
-                        <td>16/11/2015</td>
-                        <td>MEs chaussettessss</td>
-                    </tr>
+                #{list items:events, var:'item'}
+                <tr>
+                    <td><a href="details"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
+                    <td>${item.DateCreation}</td>
+                    <td>${item.lesPosts.get(0)}</td>
+                </tr>
+                #{/list}
                 </tbody>
 
 

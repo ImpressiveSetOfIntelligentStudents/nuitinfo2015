@@ -2,6 +2,9 @@ package controllers;
 
 import models.Utilisateur;
 import models.UtilisateurAutorite;
+import models.Evenement;
+import java.util.List;
+import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
 
 /**
@@ -15,7 +18,9 @@ public class Autorite extends BaseController {
             Autorite.connect();
         }
 
-        render();
+        List<Evenement> events = Evenement.all().fetch();
+
+        render(events);
 
     }
 
