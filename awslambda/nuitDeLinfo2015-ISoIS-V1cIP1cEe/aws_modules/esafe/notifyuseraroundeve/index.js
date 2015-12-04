@@ -52,8 +52,13 @@ module.exports.run = function(event, context, cb) {
 
   var requestparams = {
     TableName: "Esafe-Userdatabasw",
-    KeyConditionExpression: "latitude between '" + boundingBox.min.lat + "' and '" + boundingBox.max.lat  + "' "
-                              + " and longitude between '" + boundingBox.min.long + "' and '" + boundingBox.max.long + "'"
+    KeyConditionExpression: "latitude between :latmin and :latmax and longitude between :longmin and :longmax",
+    ExpressionAttributeValues: {
+      ":latmin": boundingBox.min.lat,
+      ":latmax": boundingBox.max.lat,
+      ":longmin": boundingBox.min.long,
+      ":longmax": boundingBox.max.long
+    }
   }
 
   dynamodb.query(requestparams, function (err, data) {

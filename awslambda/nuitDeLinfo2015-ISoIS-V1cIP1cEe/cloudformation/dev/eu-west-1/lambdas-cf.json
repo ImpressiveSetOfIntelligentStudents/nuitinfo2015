@@ -18,7 +18,7 @@
         "Timeout": 6,
         "Code": {
           "S3Bucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
-          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeNotifyuseraroundeve@1449208170785.zip"
+          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeNotifyuseraroundeve@1449208451472.zip"
         },
         "Role": {
           "Ref": "aaLambdaRoleArn"
