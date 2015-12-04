@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Table(name = "evenement")
 public class Evenement extends Model{
-    static final Integer radius = 50;
+    public static final Integer radius = 50;
 
     @Column
     @Enumerated(EnumType.STRING)
@@ -41,8 +41,6 @@ public class Evenement extends Model{
         this.lat = lat;
         this.lon = lon;
         this.lesPosts = lesPosts;
-
-        dateCreation = new Date();
     }
 
     public Evenement() {

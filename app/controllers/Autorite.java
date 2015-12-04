@@ -142,7 +142,7 @@ public class Autorite extends BaseController {
         Post newPost = new Post();
         newPost.tag = "#test";
         newPost.save();
-        eve.lesPosts = new ArrayList<>();
+        eve.lesPosts = new ArrayList<Post>();
         eve.lesPosts.add(newPost);
         eve.save();
         flash.success("Evenement ajouté");
