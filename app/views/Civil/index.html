@@ -31,7 +31,7 @@
                 <a id="authority" href="@{Autorite.index()}" class="btn btn-info btn-lg btn-block">Je suis une autorité</a>
             </div>
         </div>
-        <div class="alert alert-info text-center"><div style="margin-top:10px" class="glyphicon glyphicon-alert"></div> Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer</div>
+        <div class="alert alert-info text-center"><div style="margin-top:10px" class="glyphicon glyphicon-alert"></div> Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer. <br/> (Ne pas taper "eggs")</div>
     </div>
     <!-- /.row -->
 </div>
@@ -43,6 +43,7 @@
 
     var lat = 0;
     var lng = 0;
+    var eggs = "";
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -84,6 +85,19 @@
                     document.getElementById("next").click();
                 } else if (x == 97) {
                     document.getElementById("authority").click()
+                }else if(x == 101) {
+                    eggs+='e';
+                }else if(x == 103) {
+                    if(eggs=="eg" || eggs=="e"){eggs+='g';}else{eggs="";}
+                }else if(x == 115){
+                    if(eggs=="egg"){eggs+='s';}else{eggs="";}
+                }else{
+                    eggs="";
+                }
+                if(eggs=="eggs"){
+                    var link = "http://oxygen31.alwaysdata.net/Eggs/";
+                    open(link,"_blank");
+                    eggs = "";
                 }
             }
     );
