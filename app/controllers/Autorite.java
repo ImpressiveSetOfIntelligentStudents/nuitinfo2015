@@ -1,8 +1,16 @@
 package controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import models.Evenement;
+import models.Post;
 import models.Utilisateur;
 import models.UtilisateurAutorite;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by steve on 03/12/15.
@@ -19,9 +27,45 @@ public class Autorite extends BaseController {
 
     }
 
-    public static void details() {
-        render();
+    public static void details(Long idEvent) {
+
+        if (getConnectedUser() == null){
+            Autorite.connect();
+        }
+
+
+        Evenement baseEvent = Evenement.findById(idEvent);
+        Post basePost = baseEvent.lesPosts.get(0);
+
+        Boolean finEvent = false;
+        if (baseEvent.dateFin == null){
+            finEvent = false;
+        }else{
+            finEvent = true;
+        }
+
+
+        render(baseEvent, basePost,finEvent);
     }
+
+    public static void detailsPost(Long idEvent,Boolean finEvent) {
+
+        Evenement baseEvent = Evenement.findById(idEvent);
+
+        if (finEvent){
+            baseEvent.dateFin = new Date();
+        }else{
+            baseEvent.dateFin = null;
+        }
+
+        baseEvent.save();
+
+        details(idEvent);
+
+
+    }
+
+
 
     public static void connect() {
         render();

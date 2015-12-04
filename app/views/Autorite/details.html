@@ -23,35 +23,40 @@
     <!-- Marketing Icons Section -->
     <div class="row">
         <h1 class="page-header">
-           Toulouse
+            Détails événement [${baseEvent.lat},${baseEvent.lon}]
         </h1>
         <div class="col-lg-7">
             <div id="map">Chargement de la map</div>
 
             <br>
+            <h3>En lien avec:</h3>
             <br>
             <table class="table">
 
                 <thead>
                 <tr>
-                    <th>Date</th>
-                    <th>Commentaire</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
 
                 </tr>
                 </thead>
                 <tbody>
+
+
+                %{
+                for(post in baseEvent.lesPosts) {
+                }%
                 <tr>
-                    <td>16/11/2015</td>
-                    <td>Haaaaaaaaaaaaaa c'est dégeulasse</td>
+                    <td>[${post.lat},${post.lng}]</td>
+                    <td>${post.dateCreation}</td>
+                    <td>${post.text}</td>
                 </tr>
-                <tr>
-                    <td>16/11/2015</td>
-                    <td>A laidaiefhusdhfidshf</td>
-                </tr>
-                <tr>
-                    <td>16/11/2015</td>
-                    <td>MEs chaussettessss</td>
-                </tr>
+                %{
+                }
+                }%
+
+
                 </tbody>
 
 
@@ -60,19 +65,24 @@
         </div>
         <div class="col-lg-5">
             <p style="background-color: #d43f3a;padding: 4px;">
-                <input type="checkbox" aria-label="..."> Problème réglé
+
+                <form action="detailsPost">
+                    <input type="hidden" name="idEvent" value="${baseEvent.id}">
+                    <input type="checkbox" name="finEvent" value="${finEvent}" onclick="submit()"> Problème réglé
+                </form>
+
             </p>
 
             <br>
-            <b>Début de l'incident:</b> 16/12/1022 <br>
-            <b>Fin de l'incident:</b> 16/12/1022 <br>
+            <b>Début de l'incident:</b> #{if baseEvent} ${baseEvent.dateCreation} #{/if} <br>
+            <b>Fin de l'incident:</b> #{if baseEvent} ${baseEvent.dateFin} #{/if} <br>
             <br>
             <b>Description:</b><bR>
-            Contrairement à une opinion répandue, le Lorem Ipsum n'est pas simplement du texte aléatoire. Il trouve ses racines dans une oeuvre de la littérature latine classique datant de 45 av. J.-C., le rendant vieux de 2000 ans. Un professeur du Hampden-Sydney College, en Virginie, s'est intéressé à un des mots latins les plus obscurs, consectetur, extrait d'un passage d
-            <br>
-            <br>
+            #{if basePost} ${basePost.text} #{/if}
 
-            <img src="http://img.src.ca/2014/01/23/1250x703/140123_jw65i_incendie-isle-verte_sn1250.jpg" style="width: 100%;">
+            <br>
+            <br>
+            <img src="#{if basePost} ${basePost.url} #{/if}" style="width: 100%;">
         </div>
     </div>
 
@@ -88,7 +98,7 @@
 #{set 'scriptsJS'}
 <script>
 
-    var myLatLng = {lat: -25.363, lng: 131.044};
+    var myLatLng = {lat: ${baseEvent.lat}, lng: ${baseEvent.lon}};
 
     function initialize() {
         var mapCanvas = document.getElementById('map');

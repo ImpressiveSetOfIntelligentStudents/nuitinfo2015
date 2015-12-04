@@ -28,6 +28,10 @@ public class Evenement extends Model{
     @Temporal(TemporalType.TIMESTAMP)
     public Date dateCreation;
 
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateFin;
+
     @JoinColumn
     @OneToMany
     public List<Post> lesPosts;
