@@ -1,0 +1,46 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Description": "nuitDeLinfo2015-ISoIS-V1cIP1cEe lambdas",
+  "Parameters": {
+    "aaLambdaRoleArn": {
+      "Type": "String",
+      "Default": "arn:aws:iam::366151961359:role/dev-nuitDeLinfo2015-ISoIS-V1cIP1cEe-IamRoleLambda-1BXRJFIGB7FQV"
+    }
+  },
+  "Resources": {
+    "lEsafeNotifyuseraroundeve": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Description": "",
+        "Handler": "aws_modules/esafe/notifyuseraroundeve/handler.handler",
+        "MemorySize": 1024,
+        "Runtime": "nodejs",
+        "Timeout": 6,
+        "Code": {
+          "S3Bucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
+          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeNotifyuseraroundeve@1449208451472.zip"
+        },
+        "Role": {
+          "Ref": "aaLambdaRoleArn"
+        }
+      }
+    },
+    "lEsafeGetusers": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Description": "",
+        "Handler": "aws_modules/esafe/getusers/handler.handler",
+        "MemorySize": 1024,
+        "Runtime": "nodejs",
+        "Timeout": 6,
+        "Code": {
+          "S3Bucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
+          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeGetusers@1449207920768.zip"
+        },
+        "Role": {
+          "Ref": "aaLambdaRoleArn"
+        }
+      }
+    }
+  }
+}
