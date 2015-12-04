@@ -18,7 +18,7 @@
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
                 <textarea style="width: 835px; height: 100px;" name="post"></textarea>
                 <input type="file" name="media">
-                <label>URL Youtube</label>
+                <label>Code de la vidéo Youtube</label>
                 <input class="form-control" name="youtubeURL" value=""/>
                 <input type="hidden" name="lng" value=""/>
                 <input type="hidden" name="lat" value=""/>
@@ -32,13 +32,13 @@
             <div class="panel panel-info">
                 <div class="panel-heading"><strong>Anonyme (${post.ip})</strong></div>
                 <div class="panel-body">
-                    <p>${post.text}</p><p><a href="${post.url}">${post.url}</a></p>
+                    <p>${post.text}</p>
                     #{if post.tag}<p>Mot clé : <a href="">${post.tag}</a></p>#{/if}
-                    #{if post.media}
-                        <div>${post.media}</div>
+                    #{if post.url}
+                        <div><a href="${post.url}"><img width="500" height="300" src="${post.url}"/></a></div>
                     #{/if}
                     #{if post.youtubeURL}
-                        <iframe width="500" height="300" src="${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
+                        <iframe width="500" height="300" src="http://www.youtube.com/embed/${post.youtubeURL}" frameborder="0" allowfullscreen></iframe>
                     #{/if}
                     ${post.lat} - ${post.lng}
                 </div>

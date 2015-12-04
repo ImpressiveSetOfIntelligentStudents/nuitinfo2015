@@ -25,9 +25,6 @@ public class Civil extends BaseController {
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
 
-        new Evenement(Post.TypeCatastrophe.ATTENTAT, 40.0, 40.0, new ArrayList<Post>()).save();
-        new Evenement(Post.TypeCatastrophe.OURAGAN, 60.0, 60.0, new ArrayList<Post>()).save();
-
         List<Evenement> lesEvenements = Evenement.all().fetch();
 
         render(lesPosts, lesEvenements, demandeSecours, lesGroupes, nbPosts);
