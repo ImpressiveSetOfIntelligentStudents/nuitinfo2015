@@ -23,7 +23,7 @@ public class Civil extends BaseController {
     public static void dashboard(Boolean demandeSecours, int size, int page) {
         int start = size * page;
 
-        List<Post> lesPosts = Post.find("order by dateCreation DESC").from(start).fetch(size);
+        List<Post> lesPosts = Post.find("typePost != ? order by dateCreation DESC", Post.TypePost.DANGER).from(start).fetch(size);
         int nbPosts = Post.findAll().size();
         List<Utilisateur.GroupeSanguin> lesGroupes = Arrays.asList(Utilisateur.GroupeSanguin.values());
 
