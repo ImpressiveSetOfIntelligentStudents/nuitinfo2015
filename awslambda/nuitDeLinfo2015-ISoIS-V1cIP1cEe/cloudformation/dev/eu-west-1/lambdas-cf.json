@@ -18,7 +18,24 @@
         "Timeout": 6,
         "Code": {
           "S3Bucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
-          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeNotifyuseraroundeve@1449203173733.zip"
+          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeNotifyuseraroundeve@1449208170785.zip"
+        },
+        "Role": {
+          "Ref": "aaLambdaRoleArn"
+        }
+      }
+    },
+    "lEsafeGetusers": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Description": "",
+        "Handler": "aws_modules/esafe/getusers/handler.handler",
+        "MemorySize": 1024,
+        "Runtime": "nodejs",
+        "Timeout": 6,
+        "Code": {
+          "S3Bucket": "jaws.dev.euwest1.com.isois.nuitdelinfo2015",
+          "S3Key": "JAWS/nuitDeLinfo2015-ISoIS-V1cIP1cEe/dev/lambdas/lEsafeGetusers@1449207920768.zip"
         },
         "Role": {
           "Ref": "aaLambdaRoleArn"
