@@ -100,7 +100,10 @@
         }
         if (reponse.value.toLowerCase().indexOf("minou") !=-1) {
             var jeu = $('#modalJeu');
-            jeu.modal('show');
+            jeu.modal({
+                    backdrop: 'static'
+                }
+            );
         }
     });
 </script>

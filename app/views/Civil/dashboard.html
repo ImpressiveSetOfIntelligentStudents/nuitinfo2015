@@ -9,7 +9,7 @@
         <div class="col-lg-12">
             <div class="jumbotron">
                 <h2>Bienvenue sur la plateforme d'alerte des populations.</h2>
-                <p>Postez des messages, des photos, des vidéos, et explorez les catastrophes en cours !</p>
+                <p>Postez des messages, des photos, des vidéos, et tenez-vous informé des évènements en cours.</p>
             </div>
         </div>
     </div>
@@ -17,54 +17,54 @@
     <div class="row">
         <div class="col-lg-9">
 
-            <div class="jumbotron">
-                <h2>Communiquer</h2>
-                <hr/>
-
-            <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
-
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Communiquer</h2></div>
+                <div class="panel-body">
+                    <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
 
 
-                <div class="row form-group">
-                    <label class="col-sm-2 control-label" for="post">Votre message</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" name="post" rows="3"></textarea>
-                    </div>
-                </div>
 
-                <div class="row form-group">
-                    <label class="col-sm-2 control-label" for="nom">Ajouter un média</label>
-                    <div class="col-sm-10">
-                        <div class="input-group">
+                        <div class="row form-group">
+                            <label class="col-sm-2 control-label" for="post">Votre message</label>
+                            <div class="col-sm-10">
+                                <textarea class="form-control" name="post" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label class="col-sm-2 control-label" for="nom">Ajouter un média</label>
+                            <div class="col-sm-10">
+                                <div class="input-group">
                             <span class="input-group-btn">
                                 <span class="btn btn-primary btn-file">
                                     Choisir un fichier&hellip; <input type="file" multiple name="media">
                                 </span>
                             </span>
-                            <input type="text" class="form-control" readonly>
+                                    <input type="text" class="form-control" readonly>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
 
-                <div class="row form-group">
-                    <label class="col-sm-2 control-label" for="nom">Code vidéo Youtube</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" name="youtubeURL" value=""/>
-                    </div>
+                        <div class="row form-group">
+                            <label class="col-sm-2 control-label" for="nom">Code vidéo Youtube</label>
+                            <div class="col-sm-10">
+                                <input class="form-control" name="youtubeURL" value=""/>
+                            </div>
+                        </div>
+                        <input type="hidden" id="lng" name="lng" value=""/>
+                        <input type="hidden" id="lat" name="lat" value=""/>
+                        <div class="row form-group">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-10">
+                                <input type="submit" class="btn btn-block btn-success" value="Valider le message"/>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <input type="hidden" id="lng" name="lng" value=""/>
-                <input type="hidden" id="lat" name="lat" value=""/>
-                <div class="row form-group">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-10">
-                        <input type="submit" class="btn btn-block btn-success" value="Valider le message"/>
-                    </div>
-                </div>
-            </form>
             </div>
 
-            <div class="jumbotron">
-            <h2>Flux d'événements</h2>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Flux d'événements</h2></div>
             </div>
 
             #{list items:lesPosts, as:'post'}
@@ -94,20 +94,22 @@
             </ul>
             #{/if}
 
-
-            <h2>Carte des évènements</h2>
-            <hr/>
-            <div class="row">
-            <div id="map" style="height: 500px; width: 100%;"></div>
+            <div class="panel panel-default">
+                <div class="panel-heading"><h2>Carte des évènements</h2></div>
+                <div id="map" style="height: 500px; width: 100%;"></div>
             </div>
         </div>
 
         <div class="col-lg-3">
-            <h2>Chat</h2>
-            <hr/>
-            <div style="height: 700px;" class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://nuitdelinfo2015chat.herokuapp.com/channel/global"></iframe>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h2>Chat</h2>
+                </div>
+                <div style="height: 700px;" class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="https://nuitdelinfo2015chat.herokuapp.com/channel/global"></iframe>
+                </div>
             </div>
+
         </div>
     </div>
     <!-- /.row -->
