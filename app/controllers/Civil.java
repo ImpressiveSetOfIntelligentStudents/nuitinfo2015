@@ -3,6 +3,8 @@ import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -75,7 +77,7 @@ public class Civil extends BaseController {
     }
 
     public static void ajouterInfosDanger(String nom, String prenom, String tel, String email,
-                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, Date dateNaissance) {
+                                          Utilisateur.GroupeSanguin groupesanguin, String sexe, String dateNaissance) {
         Utilisateur u = new Utilisateur();
         u.nom = nom;
         u.prenom = prenom;
@@ -83,9 +85,23 @@ public class Civil extends BaseController {
         u.groupeSanguin = groupesanguin;
         u.sexe = sexe;
         u.telephone = tel;
-        u.dateNaissance = dateNaissance;
+        u.dateNaissance = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            u.dateNaissance = formatter.parse(dateNaissance);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         u.ip = request.remoteAddress;
         u.save();
-    }
 
+        flash.success("Merci " + u.prenom + " " + u.nom + " (" + u.sexe + ") ! " +
+                "Vos informations ont bien été enregistrées. " +
+                "Les secours sont prévenus nous allons traiter votre alerte dans les plus brefs délais. " +
+                "Résumé de vos informations : En cas de transfusion sanguine nous vous fournirons du sang " +
+                u.groupeSanguin.nom() + " ; téléphone : " + u.telephone + " ; date de naissance : "
+                + u.dateNaissance + " ; email : " + u.email + " ; ip : " + u.ip);
+        dashboard(false, 5, 0);
+    }
 }

@@ -55,7 +55,7 @@ public class Utilisateur extends Model {
             this.name = name;
         }
 
-        public String toString(){
+        public String nom(){
             return name;
         }
     }
