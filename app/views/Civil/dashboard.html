@@ -8,15 +8,19 @@
     <div class="row" style="margin-top: 15px;">
         <div class="col-lg-12">
             <div class="jumbotron">
-                <h2>Bienvenue sur la plateforme gouvernementale d'alerte des populations.</h2>
+                <h2>Bienvenue sur la plateforme d'alerte des populations.</h2>
                 <p>Postez des messages, des photos, des vidéos, et explorez les catastrophes en cours !</p>
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="col-lg-9">
-            <h2>Communiquer</h2>
-            <hr/>
+
+            <div class="jumbotron">
+                <h2>Communiquer</h2>
+                <hr/>
+
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
 
 
@@ -54,9 +58,11 @@
                     </div>
                 </div>
             </form>
+                </div>
 
+            <div class="jumbotron">
             <h2>Flux d'événements</h2>
-            <hr/>
+            </div>
 
             #{list items:lesPosts, as:'post'}
             <div class="panel panel-info">
@@ -178,7 +184,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                     <input type="submit" class="btn btn-primary" value="Enregistrer" />
                 </div>
             </form>
@@ -285,7 +291,7 @@
 
         $(function () {
             $('#datetimepicker').datetimepicker();
-            $('#datetimepicker').data("DateTimePicker").format("d/MM/YYYY");
+            $('#datetimepicker').data("DateTimePicker").format("D/MM/YYYY");
         });
     </script>
 #{/set}

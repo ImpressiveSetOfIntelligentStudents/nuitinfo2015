@@ -5,6 +5,7 @@ import play.db.jpa.Model;
 import javax.persistence.*;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by cedricrohaut on 12/3/15.
@@ -74,5 +75,7 @@ public class Post extends Model {
             return name;
         }
     }
+
+
 
 }

@@ -29,7 +29,10 @@ public class Autorite extends BaseController {
         for (Evenement event : events) {
             System.out.println(event.id);
         }
-        render(events);
+
+        List<Post> inDangerList = Post.find("typePost = ?", Post.TypePost.DANGER).fetch();
+
+        render(events, inDangerList);
 
     }
 
