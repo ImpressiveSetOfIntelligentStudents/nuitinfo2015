@@ -13,8 +13,9 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-lg-9">
+
+    <div class="col-lg-9">
+        <div class="row">
             <h2>Communiquer</h2>
             <hr/>
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
@@ -44,16 +45,21 @@
 
                 <div class="row form-group">
                     <label class="col-sm-2 control-label" for="nom">Code vidéo Youtube</label>
-                    <div class="col-sm-8">
+                    <div class="col-sm-10">
                         <input class="form-control" name="youtubeURL" value=""/>
                     </div>
-                        <input type="hidden" id="lng" name="lng" value=""/>
-                        <input type="hidden" id="lat" name="lat" value=""/>
-                     <div class="col-sm-2">
-                        <input type="submit" class="btn btn-block btn-success" value="Valider"/>
+                </div>
+                <input type="hidden" id="lng" name="lng" value=""/>
+                <input type="hidden" id="lat" name="lat" value=""/>
+                <div class="row form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <input type="submit" class="col-sm-10 btn btn-block btn-success" value="Envoyer votre message"/>
                     </div>
                 </div>
             </form>
+        </div>
+        <div class="row">
 
             <h2>Flux d'événements</h2>
             <hr/>
@@ -85,19 +91,21 @@
             </ul>
             #{/if}
 
+        </div>
 
+        <div class="row">
             <h2>Carte des évènements</h2>
             <hr/>
             <div class="row">
             <div id="map" style="height: 500px; width: 100%;"></div>
             </div>
         </div>
+        </div>
 
         <div class="col-lg-3">
             <h2>Chat</h2>
             <hr/>
         </div>
-    </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
