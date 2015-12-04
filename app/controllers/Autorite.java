@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by steve on 03/12/15.
@@ -126,5 +124,17 @@ public class Autorite extends BaseController {
         session.clear();
         flash.success("Vous êtes bien déconnecté.");
         index();
+    }
+
+    public static void ajouterEvenementPost() {
+        Evenement eve = new Evenement();
+        eve.dateCreation = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_YEAR, 7);
+        Date dans1semaine = cal.getTime();
+        eve.dateFin = dans1semaine;
+        eve.type = Post.TypeCatastrophe.SEISME;
+        eve.save();
     }
 }
