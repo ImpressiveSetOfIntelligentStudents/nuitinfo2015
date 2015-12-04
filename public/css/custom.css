@@ -85,3 +85,18 @@ footer {
         height: 70%;
     }
 }
+
+#piecejointe{
+    display: inline-block;
+    vertical-align: top;
+}
+
+#imgpj{
+    padding: 4px;
+    vertical-align: top;
+}
+
+#videopj{
+    padding: 4px;
+    vertical-align: top;
+}
