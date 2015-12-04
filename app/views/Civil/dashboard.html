@@ -5,36 +5,67 @@
 <div class="container">
 
     <!-- Marketing Icons Section -->
-    <div class="row">
+    <div class="row" style="margin-top: 15px;">
         <div class="col-lg-12">
             <div class="jumbotron">
-            #{if dashboardApresDanger}
-                <h1>Les authorités vont faire tout leur possible pour vous aider.</h1>
-                <p>
-
-                </p>
-            #{/if}
-            #{else}
-                <h1>Bienvenue</h1>
+                <h2>Bienvenue sur la plateforme d'alerte des populations.</h2>
                 <p>Postez des messages, des photos, des vidéos, et explorez les catastrophes en cours !</p>
-            #{/else}
             </div>
         </div>
+    </div>
+
+    <div class="row">
         <div class="col-lg-9">
-            <h2>Communiquer</h2>
-            <hr/>
+
+            <div class="jumbotron">
+                <h2>Communiquer</h2>
+                <hr/>
+
             <form method="POST" action="@{Civil.ajouterPost()}" enctype="multipart/form-data">
-                <textarea style="width: 835px; height: 100px;" name="post"></textarea>
-                <input type="file" name="media">
-                <label>Code de la vidéo Youtube</label>
-                <input class="form-control" name="youtubeURL" value=""/>
+
+
+
+                <div class="row form-group">
+                    <label class="col-sm-2 control-label" for="post">Votre message</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="post" rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 control-label" for="nom">Ajouter un média</label>
+                    <div class="col-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-primary btn-file">
+                                    Choisir un fichier&hellip; <input type="file" multiple name="media">
+                                </span>
+                            </span>
+                            <input type="text" class="form-control" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row form-group">
+                    <label class="col-sm-2 control-label" for="nom">Code vidéo Youtube</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" name="youtubeURL" value=""/>
+                    </div>
+                </div>
                 <input type="hidden" id="lng" name="lng" value=""/>
                 <input type="hidden" id="lat" name="lat" value=""/>
-                <input type="submit" class="btn btn-success" values="Valider"/>
+                <div class="row form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-10">
+                        <input type="submit" class="btn btn-block btn-success" value="Valider le message"/>
+                    </div>
+                </div>
             </form>
+            </div>
 
-            <h2>Les derniers posts</h2>
-            <hr/>
+            <div class="jumbotron">
+            <h2>Flux d'événements</h2>
+            </div>
 
             #{list items:lesPosts, as:'post'}
             <div class="panel panel-info">
@@ -74,6 +105,9 @@
         <div class="col-lg-3">
             <h2>Chat</h2>
             <hr/>
+            <div style="height: 700px;" class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://nuitdelinfo2015chat.herokuapp.com/channel/global"></iframe>
+            </div>
         </div>
     </div>
     <!-- /.row -->
@@ -156,7 +190,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
                     <input type="submit" class="btn btn-primary" value="Enregistrer" />
                 </div>
             </form>
@@ -239,9 +273,31 @@
     </script>
 
     <script type="text/javascript">
+        $(document).on('change', '.btn-file :file', function() {
+            var input = $(this),
+                    numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                    label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+            input.trigger('fileselect', [numFiles, label]);
+        });
+
+        $(document).ready( function() {
+            $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+                var input = $(this).parents('.input-group').find(':text'),
+                        log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+                if( input.length ) {
+                    input.val(log);
+                } else {
+                    if( log ) alert(log);
+                }
+
+            });
+        });
+
         $(function () {
             $('#datetimepicker').datetimepicker();
-            $('#datetimepicker').data("DateTimePicker").format("d/MM/YYYY");
+            $('#datetimepicker').data("DateTimePicker").format("D/MM/YYYY");
         });
     </script>
 #{/set}

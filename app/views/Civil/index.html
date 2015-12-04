@@ -8,12 +8,16 @@
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="col-md-12">
-                <form method="post" action="@{Civil.ajouterPostDanger()}">
+
+                <voice-player autoplay id="voix-accueil" accent="fr-FR" text="En cas de danger immédiat, appuyez sur la touche Dé ou cliquez sur Parler et dites Danger."></voice-player>
+                <voice-recognition continuous="false" id="commande-vocale"></voice-recognition>
+
+                <form id="form-danger" method="post" action="@{Civil.ajouterPostDanger()}">
                     <div class="form-group">
-                        <button id="danger" class="btn btn btn-danger btn-lg btn-block" style="margin-top: 30px; min-height: 100px;">
+                        <button id="danger" class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
                             <span aria-hidden="true" class="glyphicon glyphicon-warning-sign" style="font-size: 150%"></span>
                             <br>
-                            <span>JE SUIS EN DANGER</span>
+                            <span>JE SUIS EN DANGER :'(</span>
                         </button>
                         <input type="hidden" id="lat" name="lat">
                         <input type="hidden" id="lng" name="lng">
@@ -21,29 +25,91 @@
                 </form>
             </div>
         </div>
+    </div>
 
-        <div class="row-fluid">
+    <div class="row-fluid alert alert-info text-center alert-css">
+        <div class="row">
             <div class="col-md-6">
                 <a id="next" href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info btn-lg btn-block">Continuer vers ${applicationName}</a>
             </div>
-            <br>
             <div class="col-md-6">
                 <a id="authority" href="@{Autorite.index()}" class="btn btn-info btn-lg btn-block">Je suis une autorité</a>
             </div>
         </div>
-        <div class="alert alert-info text-center"><div style="margin-top:10px" class="glyphicon glyphicon-alert"></div> Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer. <br/> (Ne pas taper "eggs")</div>
+    </div>
+
+    <div class="row-fluid alert alert-info text-center alert-css">
+
+        <div class="row">
+            <p>
+            <div class="glyphicon glyphicon-alert"></div>
+                Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger,
+                <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer
+            </p>
+        </div>
+
+        <div class="row">
+            <form id="form-reponse">
+                <div class="col-sm-6">
+                    <input id="reponse" class="form-control" type="text" placeholder="" readonly>
+                </div>
+                <div class="col-sm-6">
+                    <button id="submit-reponse" class="btn btn-block btn-info"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> Parler</button>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
 
+<div class="modal fade" id="modalJeu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">SECRET DECOUVERT ?!</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="http://oxygen31.alwaysdata.net/Eggs/"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 #{set 'scriptsJS'}
+<script type="text/javascript">
+    var voix1 = document.querySelector('#voix-accueil');
+    var ordre = document.querySelector('#commande-vocale');
+    var reponse = document.querySelector('#reponse');
+    var form = document.querySelector('#form-reponse');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        ordre.start();
+    });
+
+    ordre.addEventListener('result', function(e) {
+        reponse.value = e.detail.result;
+        if (reponse.value.toLowerCase().indexOf("danger") !=-1) {
+            var danger = document.querySelector('#form-danger');
+            danger.submit();
+        }
+        if (reponse.value.toLowerCase().indexOf("minou") !=-1) {
+            var jeu = $('#modalJeu');
+            jeu.modal('show');
+        }
+    });
+</script>
+
 <script type="text/javascript">
     var map;
 
     var lat = 0;
     var lng = 0;
-    var eggs = "";
 
     function getLocation() {
         if (navigator.geolocation) {
@@ -56,25 +122,15 @@
     function showPosition(position) {
         lat = position.coords.latitude;
         lng = position.coords.longitude;
-        document.getElementById("lat").setAttribute("value", lat);
-        document.getElementById("lng").setAttribute("value", lng);
+        $('#lat').val(lat);
+        $('#lng').val(lng);
 
         console.log(lat);
         console.log(lng);
-
-        var latLng = new google.maps.LatLng(lat, lng);
-        map.setCenter(latLng);
-        map.setZoom(7);
     }
 
-    function initMap() {
-        getLocation();
+    getLocation();
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 0, lng: 0},
-            zoom: 1
-        });
-    }
 
     $(document).keypress(function(event) {
                 var x = event.which;
@@ -85,19 +141,6 @@
                     document.getElementById("next").click();
                 } else if (x == 97) {
                     document.getElementById("authority").click()
-                }else if(x == 101) {
-                    eggs+='e';
-                }else if(x == 103) {
-                    if(eggs=="eg" || eggs=="e"){eggs+='g';}else{eggs="";}
-                }else if(x == 115){
-                    if(eggs=="egg"){eggs+='s';}else{eggs="";}
-                }else{
-                    eggs="";
-                }
-                if(eggs=="eggs"){
-                    var link = "http://oxygen31.alwaysdata.net/Eggs/";
-                    open(link,"_blank");
-                    eggs = "";
                 }
             }
     );
