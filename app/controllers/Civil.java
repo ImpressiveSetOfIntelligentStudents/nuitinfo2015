@@ -64,6 +64,8 @@ public class Civil extends BaseController {
 
 
     public static void ajouterPostDanger(Double lat, Double lng) {
+        System.out.println(lat);
+        System.out.println(lng);
         Post p = new Post();
         p.dateCreation = new Date();
         p.lng = lng;

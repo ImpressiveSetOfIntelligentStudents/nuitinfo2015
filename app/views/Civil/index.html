@@ -84,25 +84,15 @@
     function showPosition(position) {
         lat = position.coords.latitude;
         lng = position.coords.longitude;
-        document.getElementById("lat").setAttribute("value", lat);
-        document.getElementById("lng").setAttribute("value", lng);
+        $('#lat').val(lat);
+        $('#lng').val(lng);
 
         console.log(lat);
         console.log(lng);
-
-        var latLng = new google.maps.LatLng(lat, lng);
-        map.setCenter(latLng);
-        map.setZoom(7);
     }
 
-    function initMap() {
-        getLocation();
+    getLocation();
 
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 0, lng: 0},
-            zoom: 1
-        });
-    }
 
     $(document).keypress(function(event) {
                 var x = event.which;
