@@ -1,15 +1,8 @@
 package controllers;
 import org.apache.commons.codec.digest.DigestUtils;
-<<<<<<< HEAD
 import java.io.File;
-import models.*;
-import services.*;
-=======
 import models.*;
 import services.FileUploader;
-import java.io.File;
-import java.net.*;
->>>>>>> 00261a6a507e29227861446b2d46df350613f5c9
 
 public class Accueil extends BaseController {
 
@@ -67,15 +60,4 @@ public class Accueil extends BaseController {
             register();
         }
     }
-
-<<<<<<< HEAD
-=======
-    public static void upload(File media){
-        System.out.println(media.getName());
-        FileUploader uploader = new FileUploader();
-        String url = uploader.uploadMediaFile(media);
-        flash.success(url);
-        index();
-    }
->>>>>>> 00261a6a507e29227861446b2d46df350613f5c9
 }
