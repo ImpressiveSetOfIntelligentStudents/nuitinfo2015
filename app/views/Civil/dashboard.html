@@ -221,9 +221,6 @@
             document.getElementById("lat").setAttribute("value", lat);
             document.getElementById("lng").setAttribute("value", lng);
 
-            console.log(lat);
-            console.log(lng);
-
             var latLng = new google.maps.LatLng(lat, lng);
             map.setCenter(latLng);
             map.setZoom(7);
