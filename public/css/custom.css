@@ -36,6 +36,11 @@ header.carousel .fill {
     background-size: cover;
 }
 
+.carousel-inner > .item > img {
+    margin: 0 auto;
+}
+
+
 /* 404 Page Styles */
 
 .error-404 {
