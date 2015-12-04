@@ -5,18 +5,27 @@
 <div class="container">
 
     <!-- Marketing Icons Section -->
-    <div class="row">
-        <div class="jumbotron">
-            <h1>Hello, world!</h1>
-            <form method="post" action="@{Civil.ajouterPostDanger()}">
-                <input type="submit" class="btn btn-danger" value="Je suis en danger">
-                <input type="hidden" name="lat">
-                <input type="hidden" name="lng">
-            </form>
-            <p class="textalign-center"><a href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info">Continuer vers ${applicationName}</a>
-            <p class="textalign-center"><a href="@{Autorite.index()}" class="btn btn-info">Je suis une autorité</a>
+        <div class="container-fluid">
+
+            <div class="row-fluid">
+                    <form method="post" action="@{Civil.ajouterPostDanger()}">
+                        <div class="form-group">
+                            <button class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
+                                <span aria-hidden="true" class="glyphicon glyphicon-warning-sign" style="font-size: 150%"></span>
+                                <br>
+                                <span>JE SUIS EN DANGER :'(</span>
+                            </button>
+                            <input type="hidden" name="lat">
+                            <input type="hidden" name="lng">
+                        </div>
+                    </form>
+            </div>
+
+            <div class="row-fluid">
+                <a href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info btn-lg btn-block">Continuer vers ${applicationName}</a>
+                <a href="@{Autorite.index()}" class="btn btn-info btn-lg btn-block">Je suis une autorité</a>
+            </div>
         </div>
-    </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
