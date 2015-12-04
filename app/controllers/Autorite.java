@@ -31,7 +31,7 @@ public class Autorite extends BaseController {
         }
 
         List<Post> inDangerList = Post.find("typePost = ?", Post.TypePost.DANGER).fetch();
-        
+
         render(events, inDangerList);
 
     }
