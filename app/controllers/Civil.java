@@ -64,14 +64,6 @@ public class Civil extends BaseController {
 
 
     public static void ajouterPostDanger(Double lat, Double lng) {
-        Post p = new Post();
-        p.dateCreation = new Date();
-        p.lng = lng;
-        p.lat = lat;
-        p.typePost = Post.TypePost.DANGER;
-        p.ip = request.remoteAddress;
-        p.save();
-        flash.success("Votre demande de secours a bien été prise en compte");
         boolean demandeSecours = true;
         dashboard(demandeSecours, 5, 0);
     }
