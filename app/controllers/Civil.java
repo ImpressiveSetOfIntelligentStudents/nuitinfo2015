@@ -3,13 +3,13 @@ import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 import java.io.File;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import services.CivilService;
 import services.FileUploader;
 
 /**
@@ -34,6 +34,10 @@ public class Civil extends BaseController {
     }
 
     public static void ajouterPost(String post, Double lat, Double lng, String youtubeURL, File media) {
+
+        if(lat == null || lng == null) {
+            dashboard(false, 5, 0);
+        }
 
         String tag = null;
         List<String> splitStr = Arrays.asList(post.split("\\s+"));
@@ -60,6 +64,27 @@ public class Civil extends BaseController {
         p.ip = request.remoteAddress;
         p.save();
         flash.success("Votre post a été pris en compte");
+
+        List<Evenement> events = Evenement.findAll();
+
+        if(events.size() == 0) {
+            CivilService.createEvent(p);
+        } else {
+            for (Evenement event : events) {
+                if(CivilService.isInRadius(event, p)) {
+                    event.lesPosts.add(p);
+                    event.save();
+                } else {
+                    CivilService.createEvent(p);
+                    break;
+                }
+            }
+        }
+
+        events = Evenement.findAll();
+        System.out.println("**************************************");
+        System.out.println(Evenement.findAll().size());
+        System.out.println(events.get(0).lesPosts.size());
         dashboard(false, 5, 0);
     }
 

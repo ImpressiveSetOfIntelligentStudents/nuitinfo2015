@@ -63,7 +63,8 @@ public class Post extends Model {
         INONDATION("Inondation"),
         OURAGAN("Ouragan/Cyclone/Typhon"),
         ATTENTAT("Attentat terroriste"),
-        BANDITISME("Banditisme");
+        BANDITISME("Banditisme"),
+        ADEFINIR("INCONNU");
 
         private String name = "";
 
