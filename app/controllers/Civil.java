@@ -3,6 +3,7 @@ import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 import java.io.File;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -68,6 +69,7 @@ public class Civil extends BaseController {
         System.out.println(lng);
         Post p = new Post();
         p.dateCreation = new Date();
+
         p.lng = lng;
         p.lat = lat;
         p.typePost = Post.TypePost.DANGER;
@@ -88,14 +90,13 @@ public class Civil extends BaseController {
         u.sexe = sexe;
         u.telephone = tel;
         u.dateNaissance = new Date();
+        u.ip = request.remoteAddress;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         try {
             u.dateNaissance = formatter.parse(dateNaissance);
         } catch (ParseException e) {
             e.printStackTrace();
         }
-
-        u.ip = request.remoteAddress;
         u.save();
 
         flash.success("Merci " + u.prenom + " " + u.nom + " (" + u.sexe + ") ! " +
@@ -103,7 +104,7 @@ public class Civil extends BaseController {
                 "Les secours sont prévenus nous allons traiter votre alerte dans les plus brefs délais. " +
                 "Résumé de vos informations : En cas de transfusion sanguine nous vous fournirons du sang " +
                 u.groupeSanguin.nom() + " ; téléphone : " + u.telephone + " ; date de naissance : "
-                + u.dateNaissance + " ; email : " + u.email + " ; ip : " + u.ip);
+                + formatter.format(u.dateNaissance) + " ; email : " + u.email + " ; ip : " + u.ip);
         dashboard(false, 5, 0);
     }
 }
