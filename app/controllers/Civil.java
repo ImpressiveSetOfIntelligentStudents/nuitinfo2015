@@ -1,13 +1,10 @@
 package controllers;
-import javafx.geometry.Pos;
 import models.Evenement;
 import models.Post;
 import models.Utilisateur;
 import java.io.File;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
