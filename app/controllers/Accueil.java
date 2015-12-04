@@ -1,8 +1,15 @@
 package controllers;
 import org.apache.commons.codec.digest.DigestUtils;
+<<<<<<< HEAD
 import java.io.File;
 import models.*;
 import services.*;
+=======
+import models.*;
+import services.FileUploader;
+import java.io.File;
+import java.net.*;
+>>>>>>> 00261a6a507e29227861446b2d46df350613f5c9
 
 public class Accueil extends BaseController {
 
@@ -43,13 +50,13 @@ public class Accueil extends BaseController {
         user.nom = nom;
         user.prenom = prenom;
 
-        if(Utilisateur.count("email = ?", email) > 0) {
+        if (Utilisateur.count("email = ?", email) > 0) {
             flash.error("Cette adresse email est déjà associée à un utilisateur.");
             params.flash();
             register();
         }
 
-        if(motDePasse.equals(motDePasseConfirmation)) {
+        if (motDePasse.equals(motDePasseConfirmation)) {
             user.hashedPassword = DigestUtils.sha1Hex(motDePasse);
             user.save();
             flash.success("Votre inscription a bien été prise en compte.");
@@ -61,4 +68,14 @@ public class Accueil extends BaseController {
         }
     }
 
+<<<<<<< HEAD
+=======
+    public static void upload(File media){
+        System.out.println(media.getName());
+        FileUploader uploader = new FileUploader();
+        String url = uploader.uploadMediaFile(media);
+        flash.success(url);
+        index();
+    }
+>>>>>>> 00261a6a507e29227861446b2d46df350613f5c9
 }
