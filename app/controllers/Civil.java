@@ -86,6 +86,9 @@ public class Civil extends BaseController {
         u.dateNaissance = dateNaissance;
         u.ip = request.remoteAddress;
         u.save();
+
+        flash.success("Votre demande de secours a bien été prise en compte et vos informations ont été enregistrées");
+        dashboard(false, 5, 0);
     }
 
 }
