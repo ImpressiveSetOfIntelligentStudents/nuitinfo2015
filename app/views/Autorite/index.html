@@ -42,25 +42,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                #{list items:events, as:'item'}
                     <tr>
-                        <td><a href="details"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
-                        <td>16/11/2015</td>
-                        <td>Haaaaaaaaaaaaaa c'est dégeulasse</td>
+                        <td><a href="@{Autorite.details(item?.id)}"><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></a></td>
+                        <td>${item?.dateCreation}</td>
+                        <td>#{if item?.lesPosts.size() > 0}${item?.lesPosts?.get(0)}#{/if}</td>
                     </tr>
-                    <tr>
-                        <td><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></td>
-                        <td>16/11/2015</td>
-                        <td>A laidaiefhusdhfidshf</td>
-                    </tr>
-                    <tr>
-                        <td><span aria-hidden="true" class="glyphicon glyphicon-zoom-in"></span></td>
-                        <td>16/11/2015</td>
-                        <td>MEs chaussettessss</td>
-                    </tr>
+                #{/list}
                 </tbody>
 
 
             </table>
+            <form method="post" action="@{Autorite.ajouterEvenementPost()}">
+                // FORM A FAIRE
+                <input type="submit" class="btn btn-success" value="AJOUTER">
+            </form>
 
 
         </div>

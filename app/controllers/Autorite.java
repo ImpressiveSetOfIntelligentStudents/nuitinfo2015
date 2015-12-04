@@ -1,8 +1,17 @@
 package controllers;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import models.Evenement;
+import models.Post;
 import models.Utilisateur;
 import models.UtilisateurAutorite;
+import models.Evenement;
+import java.util.List;
+import java.util.ArrayList;
 import org.apache.commons.codec.digest.DigestUtils;
+
+import java.io.File;
+import java.util.*;
 
 /**
  * Created by steve on 03/12/15.
@@ -15,13 +24,55 @@ public class Autorite extends BaseController {
             Autorite.connect();
         }
 
-        render();
+        List<Evenement> events = Evenement.findAll();
+
+        for (Evenement event : events) {
+            System.out.println(event.id);
+        }
+        render(events);
 
     }
 
-    public static void details() {
-        render();
+    public static void details(Long idEvent) {
+
+        if (getConnectedUser() == null){
+            Autorite.connect();
+        }
+
+
+        Evenement baseEvent = Evenement.findById(idEvent);
+
+        Post basePost = baseEvent.lesPosts.get(0);
+
+        Boolean finEvent = false;
+        if (baseEvent.dateFin == null){
+            finEvent = false;
+        }else{
+            finEvent = true;
+        }
+
+
+        render(baseEvent, basePost,finEvent);
     }
+
+    public static void detailsPost(Long idEvent,Boolean finEvent) {
+
+        Evenement baseEvent = Evenement.findById(idEvent);
+
+        if (finEvent){
+            baseEvent.dateFin = new Date();
+        }else{
+            baseEvent.dateFin = null;
+        }
+
+        baseEvent.save();
+
+        details(idEvent);
+
+
+    }
+
+
 
     public static void connect() {
         render();
@@ -77,5 +128,24 @@ public class Autorite extends BaseController {
         session.clear();
         flash.success("Vous êtes bien déconnecté.");
         index();
+    }
+
+    public static void ajouterEvenementPost() {
+        Evenement eve = new Evenement();
+        eve.dateCreation = new Date();
+        Calendar cal = new GregorianCalendar();
+        cal.setTime(new Date());
+        cal.add(Calendar.DAY_OF_YEAR, 7);
+        Date dans1semaine = cal.getTime();
+        eve.dateFin = dans1semaine;
+        eve.type = Post.TypeCatastrophe.SEISME;
+        Post newPost = new Post();
+        newPost.tag = "#test";
+        newPost.save();
+        eve.lesPosts = new ArrayList<>();
+        eve.lesPosts.add(newPost);
+        eve.save();
+        flash.success("Evenement ajouté");
+        Autorite.index();
     }
 }

@@ -16,17 +16,21 @@ public class Evenement extends Model{
 
     @Column
     @Enumerated(EnumType.STRING)
-    Post.TypeCatastrophe type;
+    public Post.TypeCatastrophe type;
 
     @Column
-    Double lat;
+    public Double lat;
 
     @Column
-    Double lon;
+    public Double lon;
 
     @Column
     @Temporal(TemporalType.TIMESTAMP)
     public Date dateCreation;
+
+    @Column
+    @Temporal(TemporalType.TIMESTAMP)
+    public Date dateFin;
 
     @JoinColumn
     @OneToMany
@@ -39,5 +43,9 @@ public class Evenement extends Model{
         this.lesPosts = lesPosts;
 
         dateCreation = new Date();
+    }
+
+    public Evenement() {
+
     }
 }

@@ -2,7 +2,7 @@
 #{set title:'Accueil' /}
 
 <!-- Page Content -->
-<div class="container">
+<div class="container"  onkeydown="keyCode(event)">
 
     <!-- Marketing Icons Section -->
     <div class="container-fluid">
@@ -14,7 +14,7 @@
 
                 <form method="post" action="@{Civil.ajouterPostDanger()}">
                     <div class="form-group">
-                        <button class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
+                        <button id="danger" class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
                             <span aria-hidden="true" class="glyphicon glyphicon-warning-sign" style="font-size: 150%"></span>
                             <br>
                             <span>JE SUIS EN DANGER :'(</span>
@@ -28,12 +28,18 @@
 
         <div class="row-fluid">
             <div class="col-md-6">
-                <a href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info btn-lg btn-block">Continuer vers ${applicationName}</a>
+                <a id="next" href="@{Civil.dashboard(false, 5, 0)}" class="btn btn-info btn-lg btn-block">Continuer vers ${applicationName}</a>
             </div>
             <br>
             <div class="col-md-6">
-                <a href="@{Autorite.index()}" class="btn btn-info btn-lg btn-block">Je suis une autorité</a>
+                <a id="authority" href="@{Autorite.index()}" class="btn btn-info btn-lg btn-block">Je suis une autorité</a>
             </div>
+        </div>
+    </div>
+    <div class="row-fluid">
+        <div class="alert alert-info text-center alert-css">
+            <div class="glyphicon glyphicon-alert"></div>
+            Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer
         </div>
     </div>
     <!-- /.row -->
@@ -98,5 +104,19 @@
         });
     }
 
+    $(document).keypress(function(event) {
+                var x = event.which;
+                console.log(event.which);
+                if (x == 100) {
+                    $('#danger').click();
+                } else if (x == 110) {
+                    document.getElementById("next").click();
+                } else if (x == 97) {
+                    document.getElementById("authority").click()
+                }
+            }
+    );
+
 </script>
+
 #{/set}
