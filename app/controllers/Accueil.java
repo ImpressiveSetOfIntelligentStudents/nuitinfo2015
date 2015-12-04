@@ -2,7 +2,7 @@ package controllers;
 import org.apache.commons.codec.digest.DigestUtils;
 import java.io.File;
 import models.*;
-import services.*;
+import services.FileUploader;
 
 public class Accueil extends BaseController {
 
@@ -43,13 +43,13 @@ public class Accueil extends BaseController {
         user.nom = nom;
         user.prenom = prenom;
 
-        if(Utilisateur.count("email = ?", email) > 0) {
+        if (Utilisateur.count("email = ?", email) > 0) {
             flash.error("Cette adresse email est déjà associée à un utilisateur.");
             params.flash();
             register();
         }
 
-        if(motDePasse.equals(motDePasseConfirmation)) {
+        if (motDePasse.equals(motDePasseConfirmation)) {
             user.hashedPassword = DigestUtils.sha1Hex(motDePasse);
             user.save();
             flash.success("Votre inscription a bien été prise en compte.");
@@ -60,5 +60,4 @@ public class Accueil extends BaseController {
             register();
         }
     }
-
 }
