@@ -43,8 +43,8 @@
         <div class="row">
             <p>
             <div class="glyphicon glyphicon-alert"></div>
-                Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger,
-                <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer
+            Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger,
+            <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer vers ${applicationName}<br/>(Ne pas taper "eggs" ou dire le mot "minou")
             </p>
         </div>
 
@@ -73,7 +73,7 @@
 
             <div class="modal-body">
                 <div class="embed-responsive embed-responsive-16by9">
-                    <iframe class="embed-responsive-item" src="http://oxygen31.alwaysdata.net/Eggs/"></iframe>
+                    <iframe class="embed-responsive-item"></iframe>
                 </div>
             </div>
         </div>
@@ -100,17 +100,19 @@
         }
         if (reponse.value.toLowerCase().indexOf("minou") !=-1) {
             var jeu = $('#modalJeu');
-            jeu.modal({
-                    backdrop: 'static'
-                }
-            );
+            jeu.modal('show');
+            $('#modalJeu .embed-responsive-item').attr('src','http://oxygen31.alwaysdata.net/Eggs/');
         }
+    });
+
+    $('#modalJeu').on('hidden.bs.modal', function () {
+        $('#modalJeu .embed-responsive-item').removeAttr('src');
     });
 </script>
 
 <script type="text/javascript">
     var map;
-
+    var eggs="";
     var lat = 0;
     var lng = 0;
 
@@ -144,6 +146,20 @@
                     document.getElementById("next").click();
                 } else if (x == 97) {
                     document.getElementById("authority").click()
+                }else if(x == 101) {
+                    eggs+='e';
+                }else if(x == 103) {
+                    if(eggs=="eg" || eggs=="e"){eggs+='g';}else{eggs="";}
+                }else if(x == 115){
+                    if(eggs=="egg"){eggs+='s';}else{eggs="";}
+                }else{
+                    eggs="";
+                }
+                if(eggs=="eggs"){
+                    var jeu = $('#modalJeu');
+                     jeu.modal('show');
+                     $('#modalJeu .embed-responsive-item').attr('src','http://oxygen31.alwaysdata.net/Eggs/');
+                    eggs = "";
                 }
             }
     );
