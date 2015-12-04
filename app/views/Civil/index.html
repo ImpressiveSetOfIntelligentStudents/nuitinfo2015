@@ -9,10 +9,10 @@
         <div class="row-fluid">
             <div class="col-md-12">
 
-                <voice-player id="voix-accueil" accent="fr-FR"></voice-player>
-                <voice-recognition id="commande-vocale"></voice-recognition>
+                <voice-player autoplay id="voix-accueil" accent="fr-FR" text="En cas de danger immédiat, appuyez sur la touche Dé ou cliquez sur Parler et dites Danger."></voice-player>
+                <voice-recognition continuous="false" id="commande-vocale"></voice-recognition>
 
-                <form method="post" action="@{Civil.ajouterPostDanger()}">
+                <form id="form-danger" method="post" action="@{Civil.ajouterPostDanger()}">
                     <div class="form-group">
                         <button id="danger" class="btn btn btn-danger btn-lg btn-block" style="margin-top: 20px; min-height: 100px;">
                             <span aria-hidden="true" class="glyphicon glyphicon-warning-sign" style="font-size: 150%"></span>
@@ -42,29 +42,57 @@
             Raccourcis clavier: <strong>D</strong> pour signaler votre mise en danger, <strong>A</strong> si vous êtes une autorité, <strong>N</strong> si vous voulez continuer
         </div>
     </div>
+
+    <div class="row">
+        <form id="form-reponse">
+            <input type="text" id="reponse" disabled/>
+            <button id="submit-reponse" class="btn btn-info"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> Parler</button>
+        </form>
+    </div>
     <!-- /.row -->
 </div>
 <!-- /.container -->
+
+<div class="modal fade" id="modalJeu" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">SECRET DECOUVERT ?!</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="http://oxygen31.alwaysdata.net/Eggs/"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 #{set 'scriptsJS'}
 <script type="text/javascript">
     var voix1 = document.querySelector('#voix-accueil');
     var ordre = document.querySelector('#commande-vocale');
+    var reponse = document.querySelector('#reponse');
+    var form = document.querySelector('#form-reponse');
 
-    voix1.text = "En cas de danger immédiat, appuyez sur la touche Dé ou dites Danger."
-
-    voix1.addEventListener('onend', function() {
-        alert("FIN DISCOURS");
-        //input.textContent = e.detail.result;
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        ordre.start();
     });
 
     ordre.addEventListener('result', function(e) {
-        alert(e.detail.result);
-        //reponse.textContent = e.detail.result;
+        reponse.value = e.detail.result;
+        if (reponse.value.toLowerCase().indexOf("danger") !=-1) {
+            var danger = document.querySelector('#form-danger');
+            danger.submit();
+        }
+        if (reponse.value.toLowerCase().indexOf("minou") !=-1) {
+            var jeu = $('#modalJeu');
+            jeu.modal('show');
+        }
     });
-
-    voix1.speak();
-    //ordre.start();
 </script>
 
 <script type="text/javascript">
